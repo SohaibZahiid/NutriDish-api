@@ -28,5 +28,9 @@ public class RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
+    public List<RecipeEntity> getRecipesFeatured() {
+        return recipeRepository.findTop3ByFeaturedTrue();
+    }
+
 
 }

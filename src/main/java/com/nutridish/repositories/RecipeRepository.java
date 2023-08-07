@@ -12,4 +12,6 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
 
     List<RecipeEntity> findByMealType(String type);
 
+    List<RecipeEntity> findTop3ByFeaturedTrue();
+
 }
