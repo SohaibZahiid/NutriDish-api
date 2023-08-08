@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class RecipeController {
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -29,11 +29,6 @@ public class RecipeController {
     @GetMapping("/recipe/{id}")
     public RecipeEntity getRecipeById(@PathVariable Long id) {
         return this.recipeService.getRecipeById(id);
-    }
-
-    @GetMapping("/recipes/featured")
-    public List<RecipeEntity> getRecipesFeatured() {
-        return this.recipeService.getRecipesFeatured();
     }
 
 }

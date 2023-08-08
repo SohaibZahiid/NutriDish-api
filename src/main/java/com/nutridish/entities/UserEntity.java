@@ -28,11 +28,6 @@ public class UserEntity implements Serializable {
     @NotBlank(message = "Username is required")
     private String username;
 
-    @Column(name = "email")
-    @NotBlank(message = "Email is required")
-    @Email
-    private String email;
-
     @NotBlank(message = "Password is required")
     @Column(name = "password")
     private String password;

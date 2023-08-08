@@ -2,6 +2,7 @@ package com.nutridish.services;
 
 import com.nutridish.dto.UserDTO;
 import com.nutridish.entities.UserEntity;
+import com.nutridish.pojos.JsonRes;
 import com.nutridish.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -13,73 +14,60 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
+
     }
 
-    public ResponseEntity<String> register(UserEntity user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already taken");
-        }
-
+    public JsonRes<UserEntity> register(UserEntity user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already taken");
+            return new JsonRes<>(false, 400, "Username is already taken", null);
         }
 
         UserEntity registeredUser = userRepository.save(user);
         if (registeredUser == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register user");
+            return new JsonRes<>(false, 500, "Failed to register user", null);
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+        return new JsonRes<>(true, 200, "User registered successfully", registeredUser);
     }
 
-    public ResponseEntity<UserDTO> login(String username, String password) {
+    public JsonRes<UserEntity> login(String username, String password) {
         UserEntity user = userRepository.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
-            UserDTO mappedUser = modelMapper.map(user, UserDTO.class);
-            return ResponseEntity.ok(mappedUser);
+            return new JsonRes<>(true, 200, "Login successful", user);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return new JsonRes<>(false, 401, "Login failed", null);
         }
     }
 
-    public ResponseEntity<UserDTO> getUserById(Long id) {
+    public JsonRes<UserEntity> getUserById(Long id) {
         UserEntity user = userRepository.findById(id).orElse(null);
 
         if (user != null) {
-            UserDTO mappedUser = modelMapper.map(user, UserDTO.class);
-            return ResponseEntity.ok(mappedUser);
+            return new JsonRes<>(true, 200, "User found", user);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return new JsonRes<>(false, 404, "User not found", null);
         }
     }
 
-    public ResponseEntity<String> updateUser(Long id, UserEntity user) {
-
+    public JsonRes<UserEntity> updateUser(Long id, UserEntity user) {
         UserEntity existingUser = userRepository.findById(id).orElse(null);
 
-
         if (existingUser == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
-        } else if(!existingUser.getEmail().equals(user.getEmail()) && userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already taken");
+            return new JsonRes<>(false, 400, "User not found", null);
         } else if (!existingUser.getUsername().equals(user.getUsername()) && userRepository.existsByUsername(user.getUsername())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already taken");
+            return new JsonRes<>(false, 400, "Username is already taken", null);
         } else {
             existingUser.setName(user.getName());
-            existingUser.setEmail(user.getEmail());
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             userRepository.save(existingUser);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User updated successfully");
+            return new JsonRes<>(true, 200, "User updated successfully", existingUser);
         }
-
-
     }
 
 

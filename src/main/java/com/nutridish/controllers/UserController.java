@@ -3,6 +3,7 @@ package com.nutridish.controllers;
 import com.nutridish.dto.UserDTO;
 import com.nutridish.dto.UserLoginDTO;
 import com.nutridish.entities.UserEntity;
+import com.nutridish.pojos.JsonRes;
 import com.nutridish.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,12 @@ public class UserController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<String> register(@Valid @RequestBody UserEntity user) {
-        ResponseEntity<String> response = userService.register(user);
-        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+    public JsonRes<UserEntity> register(@Valid @RequestBody UserEntity user) {
+        return userService.register(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@Valid @RequestBody UserLoginDTO user) {
+    public JsonRes<UserEntity> login(@Valid @RequestBody UserLoginDTO user) {
         String username = user.getUsername();
         String password = user.getPassword();
 
@@ -35,12 +35,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+    public JsonRes<UserEntity> getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/user/{id}/update")
-    public ResponseEntity<String> updateUser(@PathVariable Long id, @Valid @RequestBody UserEntity user) {
+    public JsonRes<UserEntity> updateUser(@PathVariable Long id, @Valid @RequestBody UserEntity user) {
         return userService.updateUser(id, user);
     }
 }

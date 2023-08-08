@@ -6,14 +6,6 @@ USE db_nutridish;
 -- Create the user table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,-- Create or use the database
-DROP DATABASE IF EXISTS db_nutridish;
-CREATE DATABASE IF NOT EXISTS db_nutridish;
-USE db_nutridish;
-
--- Create the user table
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -239,4 +231,4 @@ JOIN tags t ON t.id = rt.tag_id;
 
 SELECT * FROM recipes;
 SELECT * FROM recipe_tags;
-SELECT * FROM tags;
+SELECT * FROM users;
