@@ -6,12 +6,18 @@ USE db_nutridish;
 -- Create the user table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,-- Create or use the database
+DROP DATABASE IF EXISTS db_nutridish;
+CREATE DATABASE IF NOT EXISTS db_nutridish;
+USE db_nutridish;
+
+-- Create the user table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
-    email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    UNIQUE (username),
-    UNIQUE (email)
+    UNIQUE (username)
 );
 
 
@@ -36,7 +42,7 @@ CREATE TABLE IF NOT EXISTS recipes (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     meal_type VARCHAR(50) NOT NULL,
-    created_by INT NOT NULL,
+    created_by VARCHAR(255),
     total_time INT,
     servings INT,
     image VARCHAR(255),
@@ -72,18 +78,11 @@ CREATE TABLE IF NOT EXISTS recipes_ingredients (
 );
 
 -- Insert sample data into users table
-INSERT INTO users (name, username, email, password)
+INSERT INTO users (name, username, password)
 VALUES
-    ('Michael Johnson', 'michaelj', 'michael@example.com', 'securepassword'),
-    ('Emily Brown', 'emilyb', 'emily@example.com', 'safepass123'),
-    ('Daniel Smith', 'daniels', 'daniel@example.com', 'strongpass321'),
-    ('Olivia Wilson', 'oliviaw', 'olivia@example.com', 'mypassword567'),
-    ('William Davis', 'williamd', 'william@example.com', 'mypw987'),
-    ('Sophia Martinez', 'sophiam', 'sophia@example.com', 'goodpassword'),
-    ('James Anderson', 'jamesa', 'james@example.com', 'complexpw456'),
-    ('Ava Hernandez', 'avah', 'ava@example.com', 'password321'),
-    ('Benjamin Taylor', 'benjamint', 'benjamin@example.com', 'secretpass789'),
-    ('Emma Moore', 'emmam', 'emma@example.com', 'pass1234');
+    ('Michael Johnson', 'michaelj', 'securepassword'),
+    ('Emily Brown', 'emilyb', 'safepass123');
+
 
 -- Insert sample data into tags table
 INSERT INTO tags (name)
@@ -108,16 +107,71 @@ VALUES
 -- Insert sample data into recipes table
 INSERT INTO recipes (name, description, created_by, total_time, servings, image, meal_type, featured, dietary_type)
 VALUES
-    ('Grilled Salmon', 'Deliciously grilled salmon with a lemon-dill sauce.', 3, 25, 2, 'https://example.com/grilled-salmon.jpg', 'Dinner', 1, 'Pescatarian'),
-    ('Chicken Tikka Masala', 'Classic Indian dish with tender chicken in a creamy tomato sauce.', 5, 40, 4, 'https://example.com/chicken-tikka-masala.jpg', 'Dinner', 1, 'Non-vegetarian'),
-    ('Quinoa Salad', 'A refreshing salad with quinoa, vegetables, and a zesty vinaigrette.', 1, 20, 3, 'https://example.com/quinoa-salad.jpg', 'Lunch', 0, 'Vegetarian'),
-    ('Chocolate Brownies', 'Decadent chocolate brownies with a gooey center.', 7, 60, 12, 'https://example.com/chocolate-brownies.jpg', 'Dessert', 0, 'Dairy-Free'),
-    ('Spaghetti Bolognese', 'Classic Italian pasta dish with rich meat sauce.', 2, 50, 4, 'https://example.com/spaghetti-bolognese.jpg', 'Dinner', 1, 'Non-vegetarian'),
-    ('Greek Salad', 'A Mediterranean delight with tomatoes, cucumbers, olives, and feta cheese.', 4, 15, 2, 'https://example.com/greek-salad.jpg', 'Lunch', 0, 'Vegetarian'),
-    ('Sushi Rolls', 'Homemade sushi rolls with fresh fish and vegetables.', 6, 30, 6, 'https://example.com/sushi-rolls.jpg', 'Dinner', 0, 'Pescatarian'),
-    ('Guacamole', 'Creamy avocado dip with tomatoes, onions, and lime juice.', 8, 10, 4, 'https://example.com/guacamole.jpg', 'Snack', 1, 'Vegan'),
-    ('Beef Stir-Fry', 'Quick and flavorful beef stir-fry with mixed vegetables.', 9, 35, 3, 'https://example.com/beef-stir-fry.jpg', 'Dinner', 1, 'Non-vegetarian'),
-    ('Raspberry Sorbet', 'Refreshing raspberry sorbet, perfect for a hot day.', 10, 15, 4, 'https://example.com/raspberry-sorbet.jpg', 'Dessert', 0, 'Vegan');
+('Vegetable Omelette', 'Delicious omelette filled with vegetables', 'Alice Johnson', 15, 1, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Banana Pancakes', 'Fluffy banana pancakes', 'John Smith', 20, 4, 'image_url', 'breakfast', 0, 'paleo'),
+('Smoked Salmon Bagel', 'Bagel with smoked salmon and cream cheese', 'Emily Davis', 10, 1, 'image_url', 'breakfast', 0, 'pescatarian'),
+('Greek Yogurt Bowl', 'Yogurt with honey, nuts, and fruits', 'James Walker', 5, 1, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Ham and Cheese Sandwich', 'Quick ham and cheese sandwich', 'Sandra Lee', 10, 1, 'image_url', 'breakfast', 0, 'non vegetarian'),
+('Berry Smoothie', 'Healthy berry smoothie', 'Brian Adams', 5, 1, 'image_url', 'breakfast', 0, 'paleo'),
+('Mushroom Scramble', 'Mushroom and egg scramble', 'Laura Clark', 10, 2, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Bacon and Eggs', 'Classic bacon and eggs breakfast', 'Kevin Miller', 15, 1, 'image_url', 'breakfast', 0, 'non vegetarian'),
+('Avocado Toast', 'Whole grain toast with mashed avocado', 'Karen Wilson', 10, 1, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Salmon Frittata', 'Baked frittata with smoked salmon', 'Samuel Lewis', 20, 4, 'image_url', 'breakfast', 0, 'pescatarian'),
+('Chicken Sausage Skillet', 'Skillet with chicken sausage and vegetables', 'Nancy Harris', 15, 2, 'image_url', 'breakfast', 0, 'non vegetarian'),
+('Vegan Oatmeal', 'Creamy oatmeal with almond milk and berries', 'Peter Thompson', 15, 2, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Shrimp and Grits', 'Southern style shrimp and grits', 'Rebecca White', 30, 4, 'image_url', 'breakfast', 0, 'pescatarian'),
+('Egg White Muffins', 'Baked egg white muffins with spinach', 'Kathleen Anderson', 20, 4, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Pork Breakfast Burrito', 'Breakfast burrito with pork sausage', 'Timothy Taylor', 20, 2, 'image_url', 'breakfast', 0, 'non vegetarian'),
+('Chia Seed Pudding', 'Healthy chia seed pudding with fruit', 'Melissa Hall', 120, 4, 'image_url', 'breakfast', 0, 'paleo'),
+('Tofu Scramble', 'Vegan tofu scramble with vegetables', 'George Young', 15, 2, 'image_url', 'breakfast', 0, 'vegetarian'),
+('Grilled Mackerel', 'Grilled mackerel with lemon', 'Patricia Allen', 15, 1, 'image_url', 'breakfast', 0, 'pescatarian'),
+('Beef Breakfast Sausage', 'Homemade beef breakfast sausage', 'Joseph Wright', 20, 4, 'image_url', 'breakfast', 0, 'non vegetarian'),
+('Coconut Pancakes', 'Fluffy coconut flour pancakes', 'Angela Scott', 20, 4, 'image_url', 'breakfast', 0, 'paleo'),
+
+
+-- Lunch
+('Grilled Chicken Salad', 'Healthy salad with grilled chicken', 'Michael Johnson', 20, 2, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Vegan Burger', 'Delicious vegan burger with fries', 'Sara Lee', 30, 1, 'image_url', 'lunch', 0, 'vegetarian'),
+('Shrimp Salad', 'Fresh salad with shrimp and avocado', 'David Kim', 15, 2, 'image_url', 'lunch', 0, 'pescatarian'),
+('Chicken Caesar Salad', 'Crispy romaine with chicken and Caesar dressing', 'Luisa Hernandez', 15, 1, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Vegetable Stir Fry', 'Mixed vegetable stir fry with soy sauce', 'Diego Sanchez', 20, 2, 'image_url', 'lunch', 0, 'vegetarian'),
+('Salmon Poke Bowl', 'Salmon, rice, and veggies with poke sauce', 'Antonio Gomez', 20, 1, 'image_url', 'lunch', 0, 'pescatarian'),
+('Lamb Gyros', 'Sliced lamb with tzatziki in pita bread', 'Maria Torres', 30, 2, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Chickpea Curry', 'Spicy chickpea and tomato curry', 'Jose Ramos', 30, 4, 'image_url', 'lunch', 0, 'vegetarian'),
+('Shrimp Tacos', 'Shrimp with slaw in soft tortilla', 'Laura Garcia', 20, 2, 'image_url', 'lunch', 0, 'pescatarian'),
+('Grilled Chicken Wrap', 'Grilled chicken with veggies in a wrap', 'Daniel Fernandez', 15, 1, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Vegan Pasta Salad', 'Pasta with veggies and vegan dressing', 'Isabel Castro', 20, 4, 'image_url', 'lunch', 0, 'vegetarian'),
+('Fish and Chips', 'Battered fish with crispy fries', 'Gabriel Jimenez', 30, 2, 'image_url', 'lunch', 0, 'pescatarian'),
+('Beef Burger', 'Juicy beef burger with cheese and lettuce', 'Roberto Morales', 20, 1, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Roasted Veggie Salad', 'Roasted veggies on a bed of greens', 'Carmen Ruiz', 30, 2, 'image_url', 'lunch', 0, 'paleo'),
+('Spicy Tuna Roll', 'Sushi roll with spicy tuna filling', 'Sergio Perez', 20, 2, 'image_url', 'lunch', 0, 'pescatarian'),
+('Chicken Noodle Soup', 'Warm soup with chicken, noodles, and veggies', 'Alicia Aguilar', 40, 4, 'image_url', 'lunch', 0, 'non vegetarian'),
+('Vegan Falafel Wrap', 'Falafel with hummus and veggies in a wrap', 'Elena Ortiz', 25, 2, 'image_url', 'lunch', 0, 'vegetarian'),
+('Grilled Sea Bass', 'Sea bass fillet with lemon and herbs', 'Oscar Delgado', 20, 1, 'image_url', 'lunch', 0, 'pescatarian'),
+('Mushroom Risotto', 'Creamy risotto with sautéed mushrooms', 'Ricardo Guerrero', 45, 4, 'image_url', 'lunch', 0, 'vegetarian'),
+('Bacon Avocado Salad', 'Greens with bacon, avocado, and vinaigrette', 'Marta Vazquez', 15, 2, 'image_url', 'lunch', 0, 'paleo'),
+
+-- Dinner
+('Steak with Vegetables', 'Grilled steak with roasted vegetables', 'Chris Williams', 40, 2, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Stuffed Bell Peppers', 'Bell peppers stuffed with quinoa and vegetables', 'Jennifer Taylor', 45, 4, 'image_url', 'dinner', 0, 'vegetarian'),
+('Grilled Tuna Steak', 'Grilled tuna steak with lemon butter', 'Robert Brown', 30, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Beef Stir Fry', 'Beef with vegetables in a savory sauce', 'Lorenzo Navarro', 30, 2, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Vegan Tofu Curry', 'Tofu with vegetables in a curry sauce', 'Rosa Soto', 35, 4, 'image_url', 'dinner', 0, 'vegetarian'),
+('Shrimp Alfredo Pasta', 'Creamy Alfredo pasta with sautéed shrimp', 'Carlos Vargas', 30, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Grilled Steak', 'Juicy grilled steak with pepper sauce', 'Emilio Paredes', 25, 1, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Vegetable Lasagna', 'Layered lasagna with vegetables and cheese', 'Sofia Duarte', 60, 6, 'image_url', 'dinner', 0, 'vegetarian'),
+('Seafood Paella', 'Rice dish with mixed seafood', 'Juan Cordero', 45, 4, 'image_url', 'dinner', 0, 'pescatarian'),
+('BBQ Chicken', 'Grilled chicken with BBQ sauce', 'Pedro Espinosa', 40, 4, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Vegan Buddha Bowl', 'Quinoa, veggies, and tahini dressing', 'Valentina Rios', 25, 2, 'image_url', 'dinner', 0, 'vegetarian'),
+('Cod with Lemon Butter', 'Baked cod with lemon butter sauce', 'Rodrigo Palma', 30, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Lamb Chops', 'Grilled lamb chops with mint sauce', 'Adriana Guzman', 30, 2, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Vegan Potato Soup', 'Creamy potato soup with almond milk', 'Miguel Mendoza', 40, 4, 'image_url', 'dinner', 0, 'vegetarian'),
+('Grilled Tilapia', 'Tilapia fillet with olive oil and herbs', 'Sara Castro', 25, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Balsamic Glazed Chicken', 'Chicken with balsamic glaze', 'Daniel Molina', 30, 4, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Eggplant Parmesan', 'Baked eggplant with marinara and cheese', 'Carla Medina', 45, 4, 'image_url', 'dinner', 0, 'vegetarian'),
+('Lobster Thermidor', 'Lobster with cheese and brandy sauce', 'Javier Rodriguez', 50, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Turkey Meatloaf', 'Homemade turkey meatloaf', 'Andrea Fernandez', 60, 6, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Zucchini Noodles', 'Zucchini noodles with pesto sauce', 'David Romero', 20, 2, 'image_url', 'dinner', 0, 'paleo');
 
 -- Insert sample data into ingredients table
 INSERT INTO ingredients (name, unit)
@@ -186,5 +240,3 @@ JOIN tags t ON t.id = rt.tag_id;
 SELECT * FROM recipes;
 SELECT * FROM recipe_tags;
 SELECT * FROM tags;
-
-
