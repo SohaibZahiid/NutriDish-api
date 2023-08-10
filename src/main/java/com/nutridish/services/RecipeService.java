@@ -29,7 +29,7 @@ public class RecipeService {
     }
 
     public List<RecipeEntity> getRecipesFeatured() {
-        return recipeRepository.findTop3ByFeaturedTrue();
+        return recipeRepository.findTop4ByFeaturedTrue();
     }
 
 

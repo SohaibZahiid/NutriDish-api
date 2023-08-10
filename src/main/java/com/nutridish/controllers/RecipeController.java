@@ -31,4 +31,8 @@ public class RecipeController {
         return this.recipeService.getRecipeById(id);
     }
 
+    @GetMapping("/recipes/featured")
+    public List<RecipeEntity> getRecipesFeatured () {
+        return this.recipeService.getRecipesFeatured();
+    }
 }
