@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,4 +33,6 @@ public class UserEntity implements Serializable {
     @NotBlank(message = "Password is required")
     @Column(name = "password")
     private String password;
+
+
 }
