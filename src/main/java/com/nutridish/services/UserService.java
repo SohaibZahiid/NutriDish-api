@@ -1,7 +1,11 @@
 package com.nutridish.services;
 
 import com.nutridish.dto.UserDTO;
+import com.nutridish.entities.FavoriteEntity;
+import com.nutridish.entities.RecipeEntity;
 import com.nutridish.entities.UserEntity;
+import com.nutridish.repositories.FavoriteRepository;
+import com.nutridish.repositories.RecipeRepository;
 import com.nutridish.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -13,17 +17,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RecipeRepository recipeRepository;
+    private final FavoriteRepository favoriteRepository;
     private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, RecipeRepository recipeRepository, FavoriteRepository favoriteRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.recipeRepository = recipeRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     public ResponseEntity<String> register(UserEntity user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already taken");
-        }
 
         if (userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already taken");
@@ -66,13 +71,11 @@ public class UserService {
 
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
-        } else if(!existingUser.getEmail().equals(user.getEmail()) && userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already taken");
         } else if (!existingUser.getUsername().equals(user.getUsername()) && userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already taken");
         } else {
             existingUser.setName(user.getName());
-            existingUser.setEmail(user.getEmail());
+
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             userRepository.save(existingUser);
@@ -82,6 +85,19 @@ public class UserService {
 
     }
 
+    public void addRecipeToFavorites(Long userId, Long recipeId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElse(null);
 
+        RecipeEntity recipe = recipeRepository.findById(recipeId)
+                .orElse(null);
+
+        FavoriteEntity favorite = new FavoriteEntity();
+        favorite.setUser(user);
+        favorite.setRecipe(recipe);
+
+        favoriteRepository.save(favorite);
+
+    }
 
 }

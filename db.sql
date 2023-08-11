@@ -6,14 +6,6 @@ USE db_nutridish;
 -- Create the user table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,-- Create or use the database
-DROP DATABASE IF EXISTS db_nutridish;
-CREATE DATABASE IF NOT EXISTS db_nutridish;
-USE db_nutridish;
-
--- Create the user table
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -76,6 +68,17 @@ CREATE TABLE IF NOT EXISTS recipes_ingredients (
     FOREIGN KEY (recipe_id) REFERENCES recipes(id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
 );
+
+CREATE TABLE IF NOT EXISTS favorites (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+);
+
+
+
 
 -- Insert sample data into users table
 INSERT INTO users (name, username, password)
@@ -158,16 +161,16 @@ VALUES
 ('Beef Stir Fry', 'Beef with vegetables in a savory sauce', 'Lorenzo Navarro', 30, 2, 'image_url', 'dinner', 0, 'non vegetarian'),
 ('Vegan Tofu Curry', 'Tofu with vegetables in a curry sauce', 'Rosa Soto', 35, 4, 'image_url', 'dinner', 0, 'vegetarian'),
 ('Shrimp Alfredo Pasta', 'Creamy Alfredo pasta with sautéed shrimp', 'Carlos Vargas', 30, 2, 'image_url', 'dinner', 0, 'pescatarian'),
-('Grilled Steak', 'Juicy grilled steak with pepper sauce', 'Emilio Paredes', 25, 1, 'image_url', 'dinner', 0, 'non vegetarian'),
-('Vegetable Lasagna', 'Layered lasagna with vegetables and cheese', 'Sofia Duarte', 60, 6, 'image_url', 'dinner', 0, 'vegetarian'),
+('Grilled Steak', 'Juicy grilled steak with pepper sauce', 'Emilio Paredes', 25, 1, 'image_url', 'dinner', 1, 'non vegetarian'),
+('Vegetable Lasagna', 'Layered lasagna with vegetables and cheese', 'Sofia Duarte', 60, 6, 'image_url', 'dinner', 1, 'vegetarian'),
 ('Seafood Paella', 'Rice dish with mixed seafood', 'Juan Cordero', 45, 4, 'image_url', 'dinner', 0, 'pescatarian'),
 ('BBQ Chicken', 'Grilled chicken with BBQ sauce', 'Pedro Espinosa', 40, 4, 'image_url', 'dinner', 0, 'non vegetarian'),
-('Vegan Buddha Bowl', 'Quinoa, veggies, and tahini dressing', 'Valentina Rios', 25, 2, 'image_url', 'dinner', 0, 'vegetarian'),
-('Cod with Lemon Butter', 'Baked cod with lemon butter sauce', 'Rodrigo Palma', 30, 2, 'image_url', 'dinner', 0, 'pescatarian'),
+('Vegan Buddha Bowl', 'Quinoa, veggies, and tahini dressing', 'Valentina Rios', 25, 2, 'image_url', 'dinner', 1, 'vegetarian'),
+('Cod with Lemon Butter', 'Baked cod with lemon butter sauce', 'Rodrigo Palma', 30, 2, 'image_url', 'dinner', 1, 'pescatarian'),
 ('Lamb Chops', 'Grilled lamb chops with mint sauce', 'Adriana Guzman', 30, 2, 'image_url', 'dinner', 0, 'non vegetarian'),
 ('Vegan Potato Soup', 'Creamy potato soup with almond milk', 'Miguel Mendoza', 40, 4, 'image_url', 'dinner', 0, 'vegetarian'),
 ('Grilled Tilapia', 'Tilapia fillet with olive oil and herbs', 'Sara Castro', 25, 2, 'image_url', 'dinner', 0, 'pescatarian'),
-('Balsamic Glazed Chicken', 'Chicken with balsamic glaze', 'Daniel Molina', 30, 4, 'image_url', 'dinner', 0, 'non vegetarian'),
+('Balsamic Glazed Chicken', 'Chicken with balsamic glaze', 'Daniel Molina', 30, 4, 'image_url', 'dinner', 1, 'non vegetarian'),
 ('Eggplant Parmesan', 'Baked eggplant with marinara and cheese', 'Carla Medina', 45, 4, 'image_url', 'dinner', 0, 'vegetarian'),
 ('Lobster Thermidor', 'Lobster with cheese and brandy sauce', 'Javier Rodriguez', 50, 2, 'image_url', 'dinner', 0, 'pescatarian'),
 ('Turkey Meatloaf', 'Homemade turkey meatloaf', 'Andrea Fernandez', 60, 6, 'image_url', 'dinner', 0, 'non vegetarian'),
@@ -232,11 +235,16 @@ VALUES
     (9, 5), -- Beef Stir-Fry - Quick & Easy
     (10, 4); -- Raspberry Sorbet - Dessert
 
+-- Insert sample data into user_favorites table
+INSERT INTO favorites (user_id, recipe_id)
+VALUES
+    (1, 3),   -- User 1 favorited Smoked Salmon Bagel
+    (1, 6),   -- User 1 favorited Berry Smoothie
+    (2, 10),  -- User 2 favorited Chicken Sausage Skillet
+    (2, 15);  -- User 2 favorited Pork Breakfast Burrito
 
-SELECT r.name, t.name FROM recipes r
-JOIN recipe_tags rt ON rt.id = r.id
-JOIN tags t ON t.id = rt.tag_id;
 
-SELECT * FROM recipes;
-SELECT * FROM recipe_tags;
-SELECT * FROM tags;
+SELECT r.id, r.name, r.description, r.meal_type, r.image
+FROM favorites uf
+JOIN recipes r ON uf.recipe_id = r.id
+WHERE uf.user_id = 2;
