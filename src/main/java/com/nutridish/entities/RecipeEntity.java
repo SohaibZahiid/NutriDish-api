@@ -81,4 +81,8 @@ public class RecipeEntity implements Serializable {
     )
     private List<TagEntity> tags;
 
+
+    @Transient
+    private boolean favorite;
+
 }

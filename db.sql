@@ -248,3 +248,11 @@ SELECT r.id, r.name, r.description, r.meal_type, r.image
 FROM favorites uf
 JOIN recipes r ON uf.recipe_id = r.id
 WHERE uf.user_id = 2;
+
+SELECT * FROM users;
+SELECT * FROM favorites;
+
+SELECT r.id, r.name, r.description, r.meal_type, r.image,
+       CASE WHEN uf.user_id IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
+FROM recipes r
+LEFT JOIN favorites uf ON r.id = uf.recipe_id AND uf.user_id = 1;
