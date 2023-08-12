@@ -42,8 +42,5 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/recipes/favorites/{userId}")
-    public List<RecipeEntity> getAllRecipesWithFavoriteIndicator(@PathVariable Long userId) {
-        return recipeService.getAllRecipesWithFavoriteIndicator(userId);
-    }
+
 }

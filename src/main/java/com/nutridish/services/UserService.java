@@ -76,26 +76,6 @@ public class UserService {
         }
     }
 
-    public JsonRes<FavoriteEntity> addRecipeToFavorites(Long userId, Long recipeId) {
-        UserEntity user = userRepository.findById(userId)
-                .orElse(null);
 
-        RecipeEntity recipe = recipeRepository.findById(recipeId)
-                .orElse(null);
-
-        boolean isAlreadyFavorite = favoriteRepository.existsByUserAndRecipe(user, recipe);
-        if (isAlreadyFavorite) {
-            return new JsonRes<>(false, 400, "Recipe is already in favorites", null);
-        }
-
-        FavoriteEntity favorite = new FavoriteEntity();
-        favorite.setUser(user);
-        favorite.setRecipe(recipe);
-
-        FavoriteEntity fr = favoriteRepository.save(favorite);
-
-        return new JsonRes<>(true, 200, "Recipe added to favorites", fr);
-
-    }
 
 }

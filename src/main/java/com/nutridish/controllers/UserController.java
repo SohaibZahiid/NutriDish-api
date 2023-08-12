@@ -46,8 +46,4 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @PostMapping("/recipe/{userId}/favorites/{recipeId}")
-    public JsonRes<FavoriteEntity> addRecipeToFavorites(@PathVariable Long userId, @PathVariable Long recipeId) {
-        return userService.addRecipeToFavorites(userId, recipeId);
-    }
 }

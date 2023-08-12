@@ -13,6 +13,7 @@ public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Long> 
 
     List<FavoriteEntity> findByUserId(Long id);
 
+
     List<FavoriteEntity> findByUser(UserEntity user);
 
     boolean existsByUserAndRecipe(UserEntity user, RecipeEntity recipe);
