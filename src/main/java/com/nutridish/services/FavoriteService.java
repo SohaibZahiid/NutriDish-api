@@ -63,19 +63,25 @@ public class FavoriteService {
         RecipeEntity recipe = recipeRepository.findById(recipeId)
                 .orElse(null);
 
-        boolean isAlreadyFavorite = favoriteRepository.existsByUserAndRecipe(user, recipe);
+        /*boolean isAlreadyFavorite = favoriteRepository.existsByUserAndRecipe(user, recipe);
         if (isAlreadyFavorite) {
             return new JsonRes<>(false, 400, "Recipe is already in favorites", null);
+        }*/
+
+        FavoriteEntity existingFavorite = favoriteRepository.findByUserAndRecipe(user, recipe);
+        
+        if (existingFavorite != null) {
+            favoriteRepository.delete(existingFavorite);
+            return new JsonRes<>(true, 200, "Recipe removed from favorites", null);
+        } else {
+            FavoriteEntity favorite = new FavoriteEntity();
+            favorite.setUser(user);
+            favorite.setRecipe(recipe);
+
+            FavoriteEntity fr = favoriteRepository.save(favorite);
+
+            return new JsonRes<>(true, 200, "Recipe added to favorites", fr);
         }
-
-        FavoriteEntity favorite = new FavoriteEntity();
-        favorite.setUser(user);
-        favorite.setRecipe(recipe);
-
-        FavoriteEntity fr = favoriteRepository.save(favorite);
-
-        return new JsonRes<>(true, 200, "Recipe added to favorites", fr);
-
     }
 
     /*public List<RecipeEntity> getAllRecipesWithFavoriteIndicator(Long userId) {
