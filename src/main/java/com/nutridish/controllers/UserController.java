@@ -43,4 +43,12 @@ public class UserController {
     public JsonRes<UserEntity> updateUser(@PathVariable Long id, @Valid @RequestBody UserEntity user) {
         return userService.updateUser(id, user);
     }
+
+    @PostMapping("/recipe/{userId}/favorites/{recipeId}")
+    public ResponseEntity<String> addRecipeToFavorites(
+            @PathVariable Long userId,
+            @PathVariable Long recipeId) {
+         userService.addRecipeToFavorites(userId, recipeId);
+        return ResponseEntity.ok("Recipe added to favorites.");
+    }
 }

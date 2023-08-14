@@ -35,4 +35,9 @@ public class RecipeController {
     public List<RecipeEntity> getRecipesFeatured () {
         return this.recipeService.getRecipesFeatured();
     }
+
+    @PostMapping("/recipe/{id}")
+    public RecipeEntity addRecipeFavourite() {
+        return null;
+    }
 }

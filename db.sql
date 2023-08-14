@@ -69,6 +69,17 @@ CREATE TABLE IF NOT EXISTS recipes_ingredients (
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
 );
 
+CREATE TABLE IF NOT EXISTS favorites (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+);
+
+
+
+
 -- Insert sample data into users table
 INSERT INTO users (name, username, password)
 VALUES
@@ -224,11 +235,16 @@ VALUES
     (9, 5), -- Beef Stir-Fry - Quick & Easy
     (10, 4); -- Raspberry Sorbet - Dessert
 
+-- Insert sample data into user_favorites table
+INSERT INTO favorites (user_id, recipe_id)
+VALUES
+    (1, 3),   -- User 1 favorited Smoked Salmon Bagel
+    (1, 6),   -- User 1 favorited Berry Smoothie
+    (2, 10),  -- User 2 favorited Chicken Sausage Skillet
+    (2, 15);  -- User 2 favorited Pork Breakfast Burrito
 
-SELECT r.name, t.name FROM recipes r
-JOIN recipe_tags rt ON rt.id = r.id
-JOIN tags t ON t.id = rt.tag_id;
 
-SELECT * FROM recipes;
-SELECT * FROM recipe_tags;
-SELECT * FROM users;
+SELECT r.id, r.name, r.description, r.meal_type, r.image
+FROM favorites uf
+JOIN recipes r ON uf.recipe_id = r.id
+WHERE uf.user_id = 2;
