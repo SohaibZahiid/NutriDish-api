@@ -3,6 +3,7 @@ package com.nutridish.services;
 import com.nutridish.entities.FavoriteEntity;
 import com.nutridish.entities.RecipeEntity;
 import com.nutridish.entities.UserEntity;
+import com.nutridish.pojos.JsonRes;
 import com.nutridish.repositories.FavoriteRepository;
 import com.nutridish.repositories.RecipeRepository;
 import com.nutridish.repositories.UserRepository;

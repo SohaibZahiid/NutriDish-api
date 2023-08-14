@@ -1,6 +1,7 @@
 package com.nutridish.controllers;
 
 import com.nutridish.entities.RecipeEntity;
+import com.nutridish.pojos.JsonRes;
 import com.nutridish.services.RecipeService;
 import org.springframework.web.bind.annotation.*;
 

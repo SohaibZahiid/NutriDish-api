@@ -40,6 +40,11 @@ public class FavoriteController {
         return favoriteService.addRecipeToFavorites(userId, recipeId);
     }
 
+    @GetMapping("/recipes/featured/favorites/{userId}")
+    public JsonRes<List<RecipeEntity>> getRecipesFeaturedFavorite(@PathVariable Long userId) {
+        return favoriteService.getRecipesFeaturedFavorite(userId);
+    }
+
     /*@GetMapping("/recipes/favorites/{userId}")
     public List<RecipeEntity> getAllRecipesWithFavoriteIndicator(@PathVariable Long userId) {
         return favoriteService.getAllRecipesWithFavoriteIndicator(userId);

@@ -91,6 +91,28 @@ public class FavoriteService {
         }
     }
 
+    public JsonRes<List<RecipeEntity>> getRecipesFeaturedFavorite(Long userId) {
+        UserEntity user = userRepository.findById(userId).orElse(null);
+
+        if (user == null) {
+            return new JsonRes<>(false, 404, "User not found", null);
+        }
+
+        List<FavoriteEntity> userFavorites = favoriteRepository.findByUser(user);
+        List<Long> favoriteRecipeIds = userFavorites.stream()
+                .map(FavoriteEntity::getRecipe)
+                .map(RecipeEntity::getId)
+                .toList();
+
+        List<RecipeEntity> featuredRecipes = recipeRepository.findTop4ByFeaturedTrue();
+
+        for (RecipeEntity recipe : featuredRecipes) {
+            recipe.setFavorite(favoriteRecipeIds.contains(recipe.getId()));
+        }
+
+        return new JsonRes<>(true, 200, "Featured recipes with favorite status", featuredRecipes);
+    }
+
     /*public List<RecipeEntity> getAllRecipesWithFavoriteIndicator(Long userId) {
         List<RecipeEntity> recipes = recipeRepository.findAll();
 
