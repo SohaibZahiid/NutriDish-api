@@ -24,8 +24,8 @@ public class FavoriteService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<RecipeEntity> getUserFavourite(Long userId) {
-        List<FavoriteEntity> favoriteEntities = favoriteRepository.findByUserId(userId);
+    public List<RecipeEntity> getUserFavourite(Long userId, String searchKey) {
+        List<FavoriteEntity> favoriteEntities = favoriteRepository.findByUserIdAndNameContainingIgnoreCase(userId, searchKey);
 
         for (FavoriteEntity favoriteEntity : favoriteEntities) {
             favoriteEntity.getRecipe().setFavorite(true);
@@ -36,8 +36,15 @@ public class FavoriteService {
                 .toList();
     }
 
-    public List<RecipeEntity> getRecipesByMealTypeAndFavorite(Long userId, String mealType) {
-        List<RecipeEntity> recipes = recipeRepository.findByMealType(mealType);
+    public List<RecipeEntity> getRecipesByMealTypeAndFavoriteAndSearchKey(Long userId, String mealType, String searchKey) {
+        List<RecipeEntity> recipes;
+
+        if (searchKey != null && !searchKey.isEmpty()) {
+            recipes = recipeRepository.findByMealTypeAndNameContainingIgnoreCase(mealType, searchKey);
+        } else {
+            recipes = recipeRepository.findByMealType(mealType);
+        }
+
         UserEntity user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
@@ -69,7 +76,7 @@ public class FavoriteService {
         }*/
 
         FavoriteEntity existingFavorite = favoriteRepository.findByUserAndRecipe(user, recipe);
-        
+
         if (existingFavorite != null) {
             favoriteRepository.delete(existingFavorite);
             return new JsonRes<>(true, 200, "Recipe removed from favorites", null);

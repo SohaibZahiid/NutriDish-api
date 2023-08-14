@@ -22,16 +22,17 @@ public class FavoriteController {
     }
 
     @GetMapping("/recipes/favorites/{id}")
-    public List<RecipeEntity> getFavoriteRecipes(@PathVariable Long id) {
-        return this.favoriteService.getUserFavourite(id);
+    public List<RecipeEntity> getFavoriteRecipes(@PathVariable Long id, @RequestParam(defaultValue = "") String searchKey) {
+        return this.favoriteService.getUserFavourite(id, searchKey);
     }
 
     @GetMapping("/recipes/{mealType}/favorites/{userId}")
     public List<RecipeEntity> getRecipesByMealTypeAndFavorite(
             @PathVariable Long userId,
-            @PathVariable String mealType
+            @PathVariable String mealType,
+            @RequestParam(defaultValue = "") String searchKey
     ) {
-        return favoriteService.getRecipesByMealTypeAndFavorite(userId, mealType);
+        return favoriteService.getRecipesByMealTypeAndFavoriteAndSearchKey(userId, mealType, searchKey);
     }
 
     @PostMapping("/recipe/{userId}/favorites/{recipeId}")

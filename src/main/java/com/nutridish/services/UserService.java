@@ -18,15 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final RecipeRepository recipeRepository;
-    private final FavoriteRepository favoriteRepository;
-    private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, RecipeRepository recipeRepository, FavoriteRepository favoriteRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-        this.recipeRepository = recipeRepository;
-        this.favoriteRepository = favoriteRepository;
     }
 
     public JsonRes<UserEntity> register(UserEntity user) {

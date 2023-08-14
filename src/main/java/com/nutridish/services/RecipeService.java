@@ -24,12 +24,20 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<RecipeEntity> getRecipes() {
-        return recipeRepository.findAll();
+    public List<RecipeEntity> getRecipes(String searchKey) {
+        if(searchKey.equals("")) {
+            return recipeRepository.findAll();
+        } else {
+            return recipeRepository.findByNameContainingIgnoreCase(searchKey);
+        }
     }
 
-    public List<RecipeEntity> getRecipesByType(String type) {
-        return recipeRepository.findByMealType(type);
+    public List<RecipeEntity> getRecipesByType(String searchKey, String type) {
+        if(searchKey.equals("")) {
+            return recipeRepository.findByMealType(type);
+        } else {
+            return recipeRepository.findByNameContainingIgnoreCaseAndMealType(searchKey, type);
+        }
     }
 
     public RecipeEntity getRecipeById(Long id) {

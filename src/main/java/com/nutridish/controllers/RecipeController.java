@@ -17,13 +17,13 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes")
-    public List<RecipeEntity> getRecipes() {
-        return this.recipeService.getRecipes();
+    public List<RecipeEntity> getRecipes(@RequestParam(defaultValue = "") String searchKey) {
+        return this.recipeService.getRecipes(searchKey);
     }
 
     @GetMapping("/recipes/{type}")
-    public List<RecipeEntity> getRecipesByType(@PathVariable String type) {
-        return this.recipeService.getRecipesByType(type);
+    public List<RecipeEntity> getRecipesByType(@RequestParam(defaultValue = "") String searchKey, @PathVariable String type) {
+        return this.recipeService.getRecipesByType(searchKey, type);
     }
 
     @GetMapping("/recipe/{id}")
@@ -35,12 +35,5 @@ public class RecipeController {
     public List<RecipeEntity> getRecipesFeatured () {
         return this.recipeService.getRecipesFeatured();
     }
-
-    @PostMapping("/recipe/{id}")
-    public RecipeEntity addRecipeFavourite() {
-        return null;
-    }
-
-
 
 }
