@@ -2,6 +2,8 @@ package com.nutridish.controllers;
 
 import com.nutridish.dto.UserDTO;
 import com.nutridish.dto.UserLoginDTO;
+import com.nutridish.entities.FavoriteEntity;
+import com.nutridish.entities.RecipeEntity;
 import com.nutridish.entities.UserEntity;
 import com.nutridish.pojos.JsonRes;
 import com.nutridish.services.UserService;
@@ -44,11 +46,4 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @PostMapping("/recipe/{userId}/favorites/{recipeId}")
-    public ResponseEntity<String> addRecipeToFavorites(
-            @PathVariable Long userId,
-            @PathVariable Long recipeId) {
-         userService.addRecipeToFavorites(userId, recipeId);
-        return ResponseEntity.ok("Recipe added to favorites.");
-    }
 }

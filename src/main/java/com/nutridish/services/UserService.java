@@ -29,16 +29,13 @@ public class UserService {
         this.favoriteRepository = favoriteRepository;
     }
 
-    public ResponseEntity<String> register(UserEntity user) {
+    public JsonRes<UserEntity> register(UserEntity user) {
 
         if (userRepository.existsByUsername(user.getUsername())) {
             return new JsonRes<>(false, 400, "Username is already taken", null);
         }
 
         UserEntity registeredUser = userRepository.save(user);
-        if (registeredUser == null) {
-            return new JsonRes<>(false, 500, "Failed to register user", null);
-        }
 
         return new JsonRes<>(true, 200, "User registered successfully", registeredUser);
     }
@@ -79,19 +76,6 @@ public class UserService {
         }
     }
 
-    public void addRecipeToFavorites(Long userId, Long recipeId) {
-        UserEntity user = userRepository.findById(userId)
-                .orElse(null);
 
-        RecipeEntity recipe = recipeRepository.findById(recipeId)
-                .orElse(null);
-
-        FavoriteEntity favorite = new FavoriteEntity();
-        favorite.setUser(user);
-        favorite.setRecipe(recipe);
-
-        favoriteRepository.save(favorite);
-
-    }
 
 }
