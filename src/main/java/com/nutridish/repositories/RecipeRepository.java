@@ -22,4 +22,11 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
 
     List<RecipeEntity> findByMealTypeAndNameContainingIgnoreCase(String mealType, String searchKey);
 
+    List<RecipeEntity> findByNameContainingIgnoreCaseAndDietaryTypeIgnoreCaseIn(String searchKey, List<String> tags);
+
+    List<RecipeEntity> findByDietaryTypeIgnoreCaseIn(List<String> tags);
+
+    List<RecipeEntity> findByMealTypeAndDietaryTypeIn(String type, List<String> tags);
+
+    List<RecipeEntity> findByNameContainingIgnoreCaseAndDietaryTypeInAndMealType(String searchKey, List<String> tags, String type);
 }

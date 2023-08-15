@@ -25,20 +25,34 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<RecipeEntity> getRecipes(String searchKey) {
-        if(searchKey.equals("")) {
+    public List<RecipeEntity> getRecipes(String searchKey, List<String> tags) {
+        if (searchKey.isEmpty() && tags.isEmpty()) {
             return recipeRepository.findAll();
-        } else {
+        } else if (tags.isEmpty()) {
             return recipeRepository.findByNameContainingIgnoreCase(searchKey);
+        } else if (searchKey.isEmpty()) {
+            return recipeRepository.findByDietaryTypeIgnoreCaseIn(tags);
+        } else {
+            return recipeRepository.findByNameContainingIgnoreCaseAndDietaryTypeIgnoreCaseIn(searchKey, tags);
         }
     }
 
-    public List<RecipeEntity> getRecipesByType(String searchKey, String type) {
-        if(searchKey.equals("")) {
-            return recipeRepository.findByMealType(type);
+    public List<RecipeEntity> getRecipesByType(String searchKey, List<String> tags, String type) {
+        if (searchKey.equals("")) {
+            if (tags.isEmpty()) {
+                return recipeRepository.findByMealType(type);
+            } else {
+                return recipeRepository.findByMealTypeAndDietaryTypeIn(type, tags);
+            }
         } else {
-            return recipeRepository.findByNameContainingIgnoreCaseAndMealType(searchKey, type);
+            if (tags.isEmpty()) {
+                return recipeRepository.findByNameContainingIgnoreCaseAndMealType(searchKey, type);
+            } else {
+                return recipeRepository.findByNameContainingIgnoreCaseAndDietaryTypeInAndMealType(searchKey, tags, type);
+            }
         }
+
+
     }
 
     public RecipeEntity getRecipeById(Long id) {
