@@ -24,25 +24,50 @@ public class FavoriteService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<RecipeEntity> getUserFavourite(Long userId, String searchKey) {
-        List<FavoriteEntity> favoriteEntities = favoriteRepository.findByUserIdAndNameContainingIgnoreCase(userId, searchKey);
+    public List<RecipeEntity> getUserFavourite(Long userId, String searchKey, List<String> tags) {
+        List<FavoriteEntity> favoriteEntities;
 
-        for (FavoriteEntity favoriteEntity : favoriteEntities) {
-            favoriteEntity.getRecipe().setFavorite(true);
+        if (searchKey != null && !searchKey.isEmpty()) {
+            favoriteEntities = favoriteRepository.findByUserIdAndNameContainingIgnoreCase(userId, searchKey);
+        } else {
+            favoriteEntities = favoriteRepository.findByUserId(userId);
         }
 
-        return favoriteEntities.stream()
+        List<Long> recipeIds = favoriteEntities.stream()
                 .map(FavoriteEntity::getRecipe)
+                .map(RecipeEntity::getId)
                 .toList();
+
+        List<RecipeEntity> recipes;
+
+        if (!tags.isEmpty()) {
+            recipes = recipeRepository.findByIdInAndDietaryTypeIn(recipeIds, tags);
+        } else {
+            recipes = recipeRepository.findByIdIn(recipeIds);
+        }
+
+        for (RecipeEntity recipe : recipes) {
+            recipe.setFavorite(true);
+        }
+
+        return recipes;
     }
 
-    public List<RecipeEntity> getRecipesByMealTypeAndFavoriteAndSearchKey(Long userId, String mealType, String searchKey) {
+    public List<RecipeEntity> getRecipesByMealTypeAndFavoriteAndSearchKey(Long userId, String mealType, String searchKey, List<String> tags) {
         List<RecipeEntity> recipes;
 
         if (searchKey != null && !searchKey.isEmpty()) {
-            recipes = recipeRepository.findByMealTypeAndNameContainingIgnoreCase(mealType, searchKey);
+            if (!tags.isEmpty()) {
+                recipes = recipeRepository.findByMealTypeAndNameContainingIgnoreCaseAndDietaryTypeIn(mealType, searchKey, tags);
+            } else {
+                recipes = recipeRepository.findByMealTypeAndNameContainingIgnoreCase(mealType, searchKey);
+            }
         } else {
-            recipes = recipeRepository.findByMealType(mealType);
+            if (!tags.isEmpty()) {
+                recipes = recipeRepository.findByMealTypeAndDietaryTypeIn(mealType, tags);
+            } else {
+                recipes = recipeRepository.findByMealType(mealType);
+            }
         }
 
         UserEntity user = userRepository.findById(userId).orElse(null);
@@ -91,11 +116,11 @@ public class FavoriteService {
         }
     }
 
-    public JsonRes<List<RecipeEntity>> getRecipesFeaturedFavorite(Long userId) {
+    public List<RecipeEntity> getRecipesFeaturedFavorite(Long userId) {
         UserEntity user = userRepository.findById(userId).orElse(null);
 
         if (user == null) {
-            return new JsonRes<>(false, 404, "User not found", null);
+            return null;
         }
 
         List<FavoriteEntity> userFavorites = favoriteRepository.findByUser(user);
@@ -110,7 +135,7 @@ public class FavoriteService {
             recipe.setFavorite(favoriteRecipeIds.contains(recipe.getId()));
         }
 
-        return new JsonRes<>(true, 200, "Featured recipes with favorite status", featuredRecipes);
+        return featuredRecipes;
     }
 
     /*public List<RecipeEntity> getAllRecipesWithFavoriteIndicator(Long userId) {

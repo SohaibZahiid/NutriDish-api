@@ -22,17 +22,19 @@ public class FavoriteController {
     }
 
     @GetMapping("/recipes/favorites/{id}")
-    public List<RecipeEntity> getFavoriteRecipes(@PathVariable Long id, @RequestParam(defaultValue = "") String searchKey) {
-        return this.favoriteService.getUserFavourite(id, searchKey);
+    public List<RecipeEntity> getFavoriteRecipes(@PathVariable Long id, @RequestParam(defaultValue = "") String searchKey,
+                                                 @RequestParam(defaultValue = "") List<String> tags) {
+        return this.favoriteService.getUserFavourite(id, searchKey, tags);
     }
 
     @GetMapping("/recipes/{mealType}/favorites/{userId}")
     public List<RecipeEntity> getRecipesByMealTypeAndFavorite(
             @PathVariable Long userId,
             @PathVariable String mealType,
-            @RequestParam(defaultValue = "") String searchKey
+            @RequestParam(defaultValue = "") String searchKey,
+            @RequestParam(defaultValue = "") List<String> tags
     ) {
-        return favoriteService.getRecipesByMealTypeAndFavoriteAndSearchKey(userId, mealType, searchKey);
+        return favoriteService.getRecipesByMealTypeAndFavoriteAndSearchKey(userId, mealType, searchKey, tags);
     }
 
     @PostMapping("/recipe/{userId}/favorites/{recipeId}")
@@ -41,7 +43,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/recipes/featured/favorites/{userId}")
-    public JsonRes<List<RecipeEntity>> getRecipesFeaturedFavorite(@PathVariable Long userId) {
+    public List<RecipeEntity> getRecipesFeaturedFavorite(@PathVariable Long userId) {
         return favoriteService.getRecipesFeaturedFavorite(userId);
     }
 
