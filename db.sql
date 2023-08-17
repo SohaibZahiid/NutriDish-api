@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS favorites (
 );
 
 
-
+ALTER TABLE recipes ADD instrucciones TEXT;
 
 -- Insert sample data into users table
 INSERT INTO users (name, username, password)
@@ -176,83 +176,465 @@ VALUES
 ('Turkey Meatloaf', 'Homemade turkey meatloaf', 'Andrea Fernandez', 60, 6, 'Receta61.jpg', 'dinner', 0, 'non vegetarian'),
 ('Zucchini Noodles', 'Zucchini noodles with pesto sauce', 'David Romero', 20, 2, 'Receta55.jpg', 'dinner', 0, 'paleo');
 
--- Insert sample data into ingredients table
-INSERT INTO ingredients (name, unit)
+-- Insertar ingredientes de Vegetable Omelette
+INSERT IGNORE INTO ingredients (name, unit)
 VALUES
-    ('Salmon', 'fillet'),
-    ('Chicken', 'breast'),
-    ('Quinoa', 'cups'),
-    ('Chocolate', 'grams'),
-    ('Ground Beef', 'grams'),
-    ('Tomato', 'medium'),
-    ('Avocado', 'pieces'),
-    ('Rice', 'cups'),
-    ('Lettuce', 'head'),
-    ('Raspberries', 'cups');
+('large eggs', 'unit'),
+('chopped fresh spinach', 'cup'),
+('sliced mushrooms', 'cup'),
+('chopped red pepper', 'cup'),
+('chopped onion', 'cup'),
+('chopped tomato', 'cup'),
+('Salt and pepper', 'to taste'),
+('olive oil or butter', 'tablespoon');
 
--- Insert sample data into recipes_ingredients table
+-- Insert ingredients for Banana Pancakes
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('ripe banana', 'unit'),
+('whole wheat flour', 'cup'),
+('milk', 'cup'),
+('baking powder', 'teaspoon'),
+('salt', 'pinch'),
+('oil or butter for frying', 'tablespoon'),
+('Honey or maple syrup for serving', 'optional');
+
+-- Ingredients for Smoked Salmon Bagel
+INSERT IGNORE INTO ingredients (name, unit) VALUES
+('Bagel', 'unit'),
+('Smoked salmon', 'gram'),
+('Cream cheese', 'tablespoon'),
+('Red onion', 'slices'),
+('Fresh dill', 'sprig'),
+('Capers', 'teaspoon'),
+('Lemon wedge', 'unit'),
+('Black pepper', 'to taste');
+
+-- Ingredients for Greek Yogurt Bowl
+INSERT IGNORE INTO ingredients (name, unit) VALUES
+('Greek yogurt', 'cup'),
+('Honey or maple syrup', 'tablespoon'),
+('Fresh berries', 'cup'),
+('Granola', 'tablespoon'),
+('Chia seeds', 'teaspoon'),
+('Sliced almonds', 'tablespoon');
+
+-- Ingredients for Ham and Cheese Sandwich
+INSERT IGNORE INTO ingredients (name, unit) VALUES
+('Bread slices', 'unit'),
+('Ham slices', 'unit'),
+('Cheese slices', 'unit'),
+('Lettuce', 'leaves'),
+('Tomato', 'slices'),
+('Mayonnaise or mustard', 'tablespoon'),
+('Butter', 'tablespoon');
+
+-- Ingredients for Grilled Chicken Salad
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Boneless chicken breasts', 'unit'),
+('Olive oil', 'tablespoon'),
+('Salt and pepper', 'to taste'),
+('Mixed salad greens', 'cup'),
+('Cherry tomatoes', 'cup'),
+('Cucumber slices', 'cup'),
+('Red onion slices', 'cup'),
+('Feta cheese', 'cup'),
+('Balsamic vinaigrette', 'tablespoon');
+
+-- Ingredients for Vegan Burger:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Black beans (canned)', 'can'),
+('Bread crumbs', 'cup'),
+('Olive oil', 'tablespoon'),
+('Garlic cloves (minced)', 'clove'),
+('Salt and pepper', 'to taste'),
+('Cumin', 'teaspoon'),
+('Vegan burger buns', 'unit'),
+('Lettuce', 'leaf'),
+('Tomato slices', 'slice'),
+('Onion slices', 'slice'),
+('Vegan mayo', 'tablespoon'),
+('Ketchup', 'tablespoon');
+
+-- Ingredients for Shrimp Salad
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Shrimps (peeled and deveined)', 'unit'),
+('Olive oil', 'tablespoon'),
+('Salt and pepper', 'to taste'),
+('Mixed salad greens', 'cup'),
+('Cherry tomatoes', 'cup'),
+('Cucumber slices', 'cup'),
+('Red onion slices', 'cup'),
+('Lemon juice', 'tablespoon'),
+('Fresh dill (chopped)', 'tablespoon');
+
+-- Ingredients for Chicken Caesar Salad:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Boneless chicken breasts', 'unit'),
+('Olive oil', 'tablespoon'),
+('Salt and pepper', 'to taste'),
+('Romaine lettuce (chopped)', 'cup'),
+('Croutons', 'cup'),
+('Grated parmesan cheese', 'tablespoon'),
+('Caesar dressing', 'tablespoon'),
+('Lemon wedges', 'wedge');
+
+-- Ingredients for Steak with Vegetables:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Beef steak', 'unit'),
+('Olive oil', 'tablespoon'),
+('Salt and pepper', 'to taste'),
+('Garlic cloves (minced)', 'clove'),
+('Broccoli florets', 'cup'),
+('Carrots (sliced)', 'cup'),
+('Green beans', 'cup'),
+('Red bell pepper (sliced)', 'cup'),
+('Onion (sliced)', 'cup'),
+('Soy sauce', 'tablespoon');
+
+-- Ingredients for Stuffed Bell Peppers:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Bell peppers', 'unit'),
+('Ground beef or turkey', 'pound'),
+('Cooked rice', 'cup'),
+('Olive oil', 'tablespoon'),
+('Onion (chopped)', 'cup'),
+('Garlic cloves (minced)', 'clove'),
+('Tomato sauce', 'cup'),
+('Salt and pepper', 'to taste'),
+('Grated cheddar cheese', 'cup'),
+('Fresh parsley (chopped)', 'tablespoon');
+
+-- Ingredients for Grilled Tuna Steak:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Tuna steaks', 'unit'),
+('Olive oil', 'tablespoon'),
+('Lemon juice', 'tablespoon'),
+('Garlic cloves (minced)', 'clove'),
+('Soy sauce', 'tablespoon'),
+('Fresh ginger (grated)', 'teaspoon'),
+('Salt and pepper', 'to taste'),
+('Sesame seeds', 'teaspoon'),
+('Fresh parsley or cilantro (chopped)', 'tablespoon');
+
+-- Ingredients for Beef Stir Fry:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Beef strips', 'pound'),
+('Olive oil', 'tablespoon'),
+('Soy sauce', 'tablespoon'),
+('Garlic cloves (minced)', 'clove'),
+('Fresh ginger (grated)', 'teaspoon'),
+('Broccoli florets', 'cup'),
+('Red bell pepper (sliced)', 'cup'),
+('Carrots (sliced)', 'cup'),
+('Snow peas', 'cup'),
+('Green onions (sliced)', 'stalk'),
+('Sesame oil', 'teaspoon'),
+('Salt and pepper', 'to taste');
+
+-- Ingredients for Vegan Tofu Curry:
+INSERT IGNORE INTO ingredients (name, unit)
+VALUES
+('Firm tofu (cubed)', 'cup'),
+('Coconut milk', 'can'),
+('Curry powder', 'tablespoon'),
+('Turmeric', 'teaspoon'),
+('Olive oil or coconut oil', 'tablespoon'),
+('Garlic cloves (minced)', 'clove'),
+('Fresh ginger (grated)', 'teaspoon'),
+('Red bell pepper (sliced)', 'cup'),
+('Carrots (sliced)', 'cup'),
+('Broccoli florets', 'cup'),
+('Snow peas', 'cup'),
+('Red onion (sliced)', 'cup'),
+('Fresh cilantro', 'tablespoon'),
+('Salt and pepper', 'to taste');
+
+SELECT * FROM ingredients;
+
+-- Associate ingredients for Vegetable Omelette
 INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-    (1, 1, 1.0),   -- Grilled Salmon - Salmon
-    (1, 6, 2.0),   -- Grilled Salmon - Tomato
-    (1, 7, 1.0),   -- Grilled Salmon - Avocado
-    (2, 2, 2.0),   -- Chicken Tikka Masala - Chicken
-    (2, 6, 1.0),   -- Chicken Tikka Masala - Tomato
-    (2, 8, 2.0),   -- Chicken Tikka Masala - Rice
-    (3, 3, 1.0),   -- Quinoa Salad - Quinoa
-    (3, 5, 0.5),   -- Quinoa Salad - Ground Beef
-    (3, 6, 1.0),   -- Quinoa Salad - Tomato
-    (4, 4, 150.0), -- Chocolate Brownies - Chocolate
-    (4, 8, 1.0),   -- Chocolate Brownies - Rice
-    (4, 9, 1.0),   -- Chocolate Brownies - Lettuce
-    (5, 5, 250.0), -- Spaghetti Bolognese - Ground Beef
-    (5, 6, 2.0),   -- Spaghetti Bolognese - Tomato
-    (5, 7, 0.5),   -- Spaghetti Bolognese - Avocado
-    (6, 6, 2.0),   -- Greek Salad - Tomato
-    (6, 9, 1.0),   -- Greek Salad - Lettuce
-    (6, 10, 1.0),  -- Greek Salad - Raspberries
-    (7, 1, 0.5),   -- Sushi Rolls - Salmon
-    (7, 6, 1.0),   -- Sushi Rolls - Tomato
-    (7, 7, 1.0),   -- Sushi Rolls - Avocado
-    (8, 7, 2.0),   -- Guacamole - Avocado
-    (8, 6, 1.0),   -- Guacamole - Tomato
-    (8, 5, 0.5),   -- Guacamole - Ground Beef
-    (9, 5, 200.0), -- Beef Stir-Fry - Ground Beef
-    (9, 6, 1.5),   -- Beef Stir-Fry - Tomato
-    (9, 10, 0.5);  -- Beef Stir-Fry - Raspberries
+(1, (SELECT id FROM ingredients WHERE name = 'large eggs'), 2),
+(1, (SELECT id FROM ingredients WHERE name = 'chopped fresh spinach'), 0.25),
+(1, (SELECT id FROM ingredients WHERE name = 'sliced mushrooms'), 0.25),
+(1, (SELECT id FROM ingredients WHERE name = 'chopped red pepper'), 0.25),
+(1, (SELECT id FROM ingredients WHERE name = 'chopped onion'), 0.25),
+(1, (SELECT id FROM ingredients WHERE name = 'chopped tomato'), 0.25),
+(1, (SELECT id FROM ingredients WHERE name = 'olive oil or butter'), 1);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
 
--- Insert sample data into recipe_tags table
-INSERT INTO recipe_tags (recipe_id, tag_id)
+-- Associate ingredients for Banana Pancakes
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-    (1, 7), -- Grilled Salmon - Pescatarian
-    (2, 8), -- Chicken Tikka Masala - Asian
-    (3, 6), -- Quinoa Salad - Comfort Food
-    (4, 4), -- Chocolate Brownies - Dessert
-    (5, 8), -- Spaghetti Bolognese - Asian
-    (6, 9), -- Greek Salad - Mediterranean
-    (7, 8), -- Sushi Rolls - Asian
-    (8, 2), -- Guacamole - Keto
-    (9, 5), -- Beef Stir-Fry - Quick & Easy
-    (10, 4); -- Raspberry Sorbet - Dessert
+(2, (SELECT id FROM ingredients WHERE name = 'ripe banana'), 1),
+(2, (SELECT id FROM ingredients WHERE name = 'large eggs'), 2),
+(2, (SELECT id FROM ingredients WHERE name = 'whole wheat flour'), 1),
+(2, (SELECT id FROM ingredients WHERE name = 'milk'), 0.5),
+(2, (SELECT id FROM ingredients WHERE name = 'baking powder'), 1),
+(2, (SELECT id FROM ingredients WHERE name = 'oil or butter for frying'), 1);
+-- We omitted 'Honey or maple syrup for serving' since it's optional.
 
--- Insert sample data into user_favorites table
-INSERT INTO favorites (user_id, recipe_id)
+-- Asociating ingredients for Smoked Salmon Bagel
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity) VALUES
+(3, (SELECT id FROM ingredients WHERE name = 'Bagel'), 1),
+(3, (SELECT id FROM ingredients WHERE name = 'Smoked salmon'), 100),
+(3, (SELECT id FROM ingredients WHERE name = 'Cream cheese'), 2),
+(3, (SELECT id FROM ingredients WHERE name = 'Red onion'), 2),
+(3, (SELECT id FROM ingredients WHERE name = 'Fresh dill'), 1),
+(3, (SELECT id FROM ingredients WHERE name = 'Capers'), 1),
+(3, (SELECT id FROM ingredients WHERE name = 'Lemon wedge'), 1),
+(3, (SELECT id FROM ingredients WHERE name = 'Black pepper'), 1);
+
+-- Asociating ingredients for Greek Yogurt Bowl
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity) VALUES
+(4, (SELECT id FROM ingredients WHERE name = 'Greek yogurt'), 1),
+(4, (SELECT id FROM ingredients WHERE name = 'Honey or maple syrup'), 1),
+(4, (SELECT id FROM ingredients WHERE name = 'Fresh berries'), 1),
+(4, (SELECT id FROM ingredients WHERE name = 'Granola'), 1),
+(4, (SELECT id FROM ingredients WHERE name = 'Chia seeds'), 1),
+(4, (SELECT id FROM ingredients WHERE name = 'Sliced almonds'), 1);
+
+-- Asociating ingredients for Ham and Cheese Sandwich
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity) VALUES
+(5, (SELECT id FROM ingredients WHERE name = 'Bread slices'), 2),
+(5, (SELECT id FROM ingredients WHERE name = 'Ham slices'), 2),
+(5, (SELECT id FROM ingredients WHERE name = 'Cheese slices'), 1),
+(5, (SELECT id FROM ingredients WHERE name = 'Lettuce'), 2),
+(5, (SELECT id FROM ingredients WHERE name = 'Tomato'), 2),
+(5, (SELECT id FROM ingredients WHERE name = 'Mayonnaise or mustard'), 1),
+(5, (SELECT id FROM ingredients WHERE name = 'Butter'), 1);
+
+-- Asociating ingredients Grilled Chicken Salad:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-    (1, 3),   -- User 1 favorited Smoked Salmon Bagel
-    (1, 6),   -- User 1 favorited Berry Smoothie
-    (2, 10),  -- User 2 favorited Chicken Sausage Skillet
-    (2, 15);  -- User 2 favorited Pork Breakfast Burrito
+(21, (SELECT id FROM ingredients WHERE name = 'Boneless chicken breasts'), 1),
+(21, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 1),
+(21, (SELECT id FROM ingredients WHERE name = 'Mixed salad greens'), 2),
+(21, (SELECT id FROM ingredients WHERE name = 'Cherry tomatoes'), 0.5),
+(21, (SELECT id FROM ingredients WHERE name = 'Cucumber slices'), 1),
+(21, (SELECT id FROM ingredients WHERE name = 'Red onion slices'), 0.5),
+(21, (SELECT id FROM ingredients WHERE name = 'Feta cheese'), 0.25),
+(21, (SELECT id FROM ingredients WHERE name = 'Balsamic vinaigrette'), 2);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Asociating ingredients vegan burger
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(22, (SELECT id FROM ingredients WHERE name = 'Black beans (canned)'), 1),
+(22, (SELECT id FROM ingredients WHERE name = 'Bread crumbs'), 0.5),
+(22, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 1),
+(22, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(22, (SELECT id FROM ingredients WHERE name = 'Cumin'), 0.5),
+(22, (SELECT id FROM ingredients WHERE name = 'Vegan burger buns'), 1),
+(22, (SELECT id FROM ingredients WHERE name = 'Lettuce'), 1),
+(22, (SELECT id FROM ingredients WHERE name = 'Tomato slices'), 2),
+(22, (SELECT id FROM ingredients WHERE name = 'Onion slices'), 2);
+-- Consider 'Salt and pepper', 'Vegan mayo', and 'Ketchup' as ingredients without a specific amount.
+
+-- Asociating ingredients shrimp salad
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(23, (SELECT id FROM ingredients WHERE name = 'Shrimps (peeled and deveined)'), 8),
+(23, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 1),
+(23, (SELECT id FROM ingredients WHERE name = 'Mixed salad greens'), 2),
+(23, (SELECT id FROM ingredients WHERE name = 'Cherry tomatoes'), 0.5),
+(23, (SELECT id FROM ingredients WHERE name = 'Cucumber slices'), 1),
+(23, (SELECT id FROM ingredients WHERE name = 'Red onion slices'), 0.5),
+(23, (SELECT id FROM ingredients WHERE name = 'Lemon juice'), 1),
+(23, (SELECT id FROM ingredients WHERE name = 'Fresh dill (chopped)'), 1);
+-- Consider 'Salt and pepper' as an ingredi
+
+-- Associate ingredients with Chicken Caesar Salad:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(24, (SELECT id FROM ingredients WHERE name = 'Boneless chicken breasts'), 1),
+(24, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 1),
+(24, (SELECT id FROM ingredients WHERE name = 'Romaine lettuce (chopped)'), 2),
+(24, (SELECT id FROM ingredients WHERE name = 'Croutons'), 1),
+(24, (SELECT id FROM ingredients WHERE name = 'Grated parmesan cheese'), 1),
+(24, (SELECT id FROM ingredients WHERE name = 'Caesar dressing'), 2),
+(24, (SELECT id FROM ingredients WHERE name = 'Lemon wedges'), 2);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Associate ingredients with Steak with Vegetables:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(41, (SELECT id FROM ingredients WHERE name = 'Beef steak'), 1),
+(41, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 2),
+(41, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(41, (SELECT id FROM ingredients WHERE name = 'Broccoli florets'), 1),
+(41, (SELECT id FROM ingredients WHERE name = 'Carrots (sliced)'), 1),
+(41, (SELECT id FROM ingredients WHERE name = 'Green beans'), 1),
+(41, (SELECT id FROM ingredients WHERE name = 'Red bell pepper (sliced)'), 0.5),
+(41, (SELECT id FROM ingredients WHERE name = 'Onion (sliced)'), 0.5),
+(41, (SELECT id FROM ingredients WHERE name = 'Soy sauce'), 2);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Associate ingredients with Stuffed Bell Peppers:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(42, (SELECT id FROM ingredients WHERE name = 'Bell peppers'), 4),
+(42, (SELECT id FROM ingredients WHERE name = 'Ground beef or turkey'), 0.5),
+(42, (SELECT id FROM ingredients WHERE name = 'Cooked rice'), 2),
+(42, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 1),
+(42, (SELECT id FROM ingredients WHERE name = 'Onion (chopped)'), 1),
+(42, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(42, (SELECT id FROM ingredients WHERE name = 'Tomato sauce'), 1),
+(42, (SELECT id FROM ingredients WHERE name = 'Grated cheddar cheese'), 1),
+(42, (SELECT id FROM ingredients WHERE name = 'Fresh parsley (chopped)'), 1);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Associate ingredients with Grilled Tuna Steak:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(43, (SELECT id FROM ingredients WHERE name = 'Tuna steaks'), 2),
+(43, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 2),
+(43, (SELECT id FROM ingredients WHERE name = 'Lemon juice'), 1),
+(43, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(43, (SELECT id FROM ingredients WHERE name = 'Soy sauce'), 1),
+(43, (SELECT id FROM ingredients WHERE name = 'Fresh ginger (grated)'), 1),
+(43, (SELECT id FROM ingredients WHERE name = 'Sesame seeds'), 1),
+(43, (SELECT id FROM ingredients WHERE name = 'Fresh parsley or cilantro (chopped)'), 1);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Associate ingredients with Beef Stir Fry:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(44, (SELECT id FROM ingredients WHERE name = 'Beef strips'), 1),
+(44, (SELECT id FROM ingredients WHERE name = 'Olive oil'), 2),
+(44, (SELECT id FROM ingredients WHERE name = 'Soy sauce'), 2),
+(44, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(44, (SELECT id FROM ingredients WHERE name = 'Fresh ginger (grated)'), 1),
+(44, (SELECT id FROM ingredients WHERE name = 'Broccoli florets'), 1),
+(44, (SELECT id FROM ingredients WHERE name = 'Red bell pepper (sliced)'), 1),
+(44, (SELECT id FROM ingredients WHERE name = 'Carrots (sliced)'), 1),
+(44, (SELECT id FROM ingredients WHERE name = 'Snow peas'), 0.5),
+(44, (SELECT id FROM ingredients WHERE name = 'Green onions (sliced)'), 2),
+(44, (SELECT id FROM ingredients WHERE name = 'Sesame oil'), 1);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
+
+-- Associate ingredients with Vegan Tofu Curry:
+INSERT INTO recipes_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(45, (SELECT id FROM ingredients WHERE name = 'Firm tofu (cubed)'), 2),
+(45, (SELECT id FROM ingredients WHERE name = 'Coconut milk'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Curry powder'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Turmeric'), 0.5),
+(45, (SELECT id FROM ingredients WHERE name = 'Olive oil or coconut oil'), 2),
+(45, (SELECT id FROM ingredients WHERE name = 'Garlic cloves (minced)'), 2),
+(45, (SELECT id FROM ingredients WHERE name = 'Fresh ginger (grated)'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Red bell pepper (sliced)'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Carrots (sliced)'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Broccoli florets'), 1),
+(45, (SELECT id FROM ingredients WHERE name = 'Snow peas'), 0.5),
+(45, (SELECT id FROM ingredients WHERE name = 'Red onion (sliced)'), 0.5),
+(45, (SELECT id FROM ingredients WHERE name = 'Fresh cilantro'), 1);
+-- Consider 'Salt and pepper' as an ingredient without a specific amount.
 
 
-SELECT r.id, r.name, r.description, r.meal_type, r.image
-FROM favorites uf
-JOIN recipes r ON uf.recipe_id = r.id
-WHERE uf.user_id = 2;
+ALTER TABLE recipes ADD instructions TEXT;
+
+-- Instructions for Vegetable Omelette
+UPDATE recipes
+SET instructions = 'In a bowl, beat the eggs and season with salt and pepper. Heat the oil or butter in a pan over medium heat. Add the vegetables and sauté until tender. Pour the beaten eggs over the vegetables in the pan. Cook until the egg is almost set, then fold the omelette in half. Cook for an additional minute on each side or until fully set. Serve hot.'
+WHERE id = 1;
+
+-- Instructions for Banana Pancakes
+UPDATE recipes
+SET instructions = 'In a bowl, mash the banana with a fork. Add the eggs and mix well. Incorporate the flour, baking powder, and salt. Mix until you get a homogeneous batter. Gradually add the milk to achieve the right consistency for pancakes. Heat the oil or butter in a pan over medium heat. Pour portions of the batter into the pan and cook until bubbles appear on the surface. Then, flip and cook until golden brown. Serve hot with honey or maple syrup.'
+WHERE id = 2;
+
+-- Instructions for Smoked Salmon Bagel
+UPDATE recipes
+SET instructions = '1. Slice the bagel in half and toast it until golden brown. 2. Spread a generous amount of cream cheese on each half. 3. Lay slices of smoked salmon over the cream cheese. 4. Sprinkle some capers and add some slices of red onion. 5. Garnish with fresh dill and a squeeze of lemon. 6. Season with black pepper to taste. 7. Serve immediately.'
+WHERE id = 3;
+
+-- Instructions for Greek Yogurt Bowl
+UPDATE recipes
+SET instructions = '1. Pour Greek yogurt into a bowl. 2. Drizzle honey or maple syrup over the yogurt. 3. Top with a mix of fresh berries. 4. Sprinkle granola over the berries. 5. Add a sprinkle of chia seeds and sliced almonds for crunch. 6. Mix slightly if desired or enjoy layered.'
+WHERE id = 4;
+
+-- Instructions for Ham and Cheese Sandwich
+UPDATE recipes
+SET instructions = '1. Lay out two slices of bread on a clean surface. 2. Spread mayonnaise or mustard on one slice. 3. Layer ham and cheese slices on the other slice. 4. Add slices of tomato and lettuce. 5. Close the sandwich by placing the slices of bread together. 6. Optionally, butter the outside of the sandwich and grill until golden brown and the cheese has melted. 7. Serve with a side of chips or a salad.'
+WHERE id = 5;
+
+-- Instructions Grilled Chicken Salad:
+UPDATE recipes
+SET instructions = 'Preheat the grill on medium-high heat. Rub the chicken breasts with olive oil, salt, and pepper. Grill the chicken for 5-7 minutes on each side or until fully cooked. Let the chicken rest for a few minutes before slicing. In a large bowl, mix the salad greens, cherry tomatoes, cucumber, and red onion. Add the sliced chicken on top. Sprinkle with feta cheese if desired. Drizzle with balsamic vinaigrette and serve.'
+WHERE id = 21;
+
+-- Instructions vegan burger
+UPDATE recipes
+SET instructions = 'Drain and rinse the black beans. Mash them in a bowl until mostly smooth. Add bread crumbs, minced garlic, salt, pepper, and cumin to the mashed beans and mix well. Form the mixture into burger patties. Heat olive oil in a pan over medium heat. Cook the patties for 4-5 minutes on each side or until they are crispy and heated through. Toast the vegan burger buns. Assemble the burgers with lettuce, tomato slices, onion slices, and vegan mayo or ketchup if desired.'
+WHERE id = 22;
+
+-- Instructions for Shrimp Salad:
+UPDATE recipes
+SET instructions = 'In a pan, heat olive oil over medium-high heat. Season shrimps with salt and pepper. Sauté shrimps for 2-3 minutes on each side or until they turn pink and are cooked through. In a large bowl, mix the salad greens, cherry tomatoes, cucumber, and red onion. Add the cooked shrimps on top. Drizzle with lemon juice and sprinkle with fresh dill. Toss everything together and serve.'
+WHERE id = 23;
+
+-- Instructions for Chicken Caesar Salad:
+UPDATE recipes
+SET instructions = 'Preheat a grill or pan over medium-high heat. Season chicken breasts with olive oil, salt, and pepper. Grill or pan-sear the chicken for 6-8 minutes on each side or until fully cooked. Let the chicken rest for a few minutes before slicing. In a large bowl, combine the romaine lettuce, croutons, and grated parmesan. Add the sliced chicken on top. Drizzle with Caesar dressing and toss to coat. Serve the salad with lemon wedges on the side.'
+WHERE id = 24;
+
+-- Instructions for Steak with Vegetables:
+UPDATE recipes
+SET instructions = 'Season the beef steak with salt, pepper, and minced garlic. Heat olive oil in a pan over medium-high heat. Sear the steak for 4-6 minutes on each side or until desired doneness. Remove the steak and let it rest. In the same pan, add a bit more olive oil and sauté the vegetables until tender. Add soy sauce to the pan and stir well. Slice the steak and serve with the sautéed vegetables.'
+WHERE id = 41;
+
+-- Instructions for Stuffed Bell Peppers:
+UPDATE recipes
+SET instructions = 'Preheat the oven to 375°F (190°C). Cut off the tops of the bell peppers and remove the seeds. In a pan, heat olive oil over medium heat. Add the chopped onion and minced garlic and sauté until translucent. Add the ground beef or turkey to the pan and cook until browned. Stir in the cooked rice and tomato sauce. Season with salt and pepper. Stuff each bell pepper with the mixture. Place the stuffed bell peppers in a baking dish and cover with aluminum foil. Bake in the preheated oven for 25-30 minutes. Remove the foil and sprinkle each pepper with grated cheddar cheese. Return to the oven and bake until the cheese is melted and bubbly. Garnish with fresh parsley before serving.'
+WHERE id = 42;
+
+-- Instructions for Grilled Tuna Steak:
+UPDATE recipes
+SET instructions = 'In a bowl, mix together olive oil, lemon juice, minced garlic, soy sauce, and grated ginger. Season the tuna steaks with salt and pepper, then marinate them in the mixture for at least 30 minutes. Preheat a grill or grill pan over medium-high heat. Grill the tuna steaks for 2-3 minutes on each side or until desired doneness. Garnish with sesame seeds and fresh parsley or cilantro. Serve immediately.'
+WHERE id = 43;
+
+-- Instructions for Beef Stir Fry:
+UPDATE recipes
+SET instructions = 'In a bowl, mix together soy sauce, minced garlic, and grated ginger. Marinate the beef strips in the mixture for at least 15 minutes. Heat olive oil in a wok or large frying pan over high heat. Add the beef strips and stir fry until browned. Remove and set aside. In the same wok, add a bit more olive oil and stir fry the vegetables until tender. Return the beef to the wok and mix well. Drizzle with sesame oil and season with salt and pepper. Garnish with sliced green onions. Serve immediately with steamed rice if desired.'
+WHERE id = 44;
+
+-- Instructions for Vegan Tofu Curry:
+UPDATE recipes
+SET instructions = 'Press the tofu to remove excess water and then cube it. In a large pan or wok, heat olive oil or coconut oil over medium heat. Add the minced garlic and grated ginger, and sauté for 1-2 minutes. Add the sliced red bell pepper, carrots, broccoli florets, snow peas, and red onion. Stir fry for 5-7 minutes or until vegetables are slightly tender. Add the tofu cubes to the pan and stir gently. Pour in the coconut milk and add curry powder and turmeric. Mix well. Let the curry simmer for 10-15 minutes, allowing flavors to meld. Season with salt and pepper to taste. Garnish with fresh cilantro before serving. Serve with steamed rice or quinoa.'
+WHERE id = 45;
 
 SELECT * FROM users;
 SELECT * FROM favorites;
+
+
+SELECT 
+    r.name AS 'Receta',
+    i.name AS 'Ingrediente',
+    ri.quantity AS 'Cantidad',
+    i.unit AS 'Unidad'
+FROM 
+    recipes r
+JOIN 
+    recipes_ingredients ri ON r.id = ri.recipe_id
+JOIN 
+    ingredients i ON ri.ingredient_id = i.id
+ORDER BY
+    r.name, i.name;
+
 
 SELECT r.id, r.name, r.description, r.meal_type, r.image,
        CASE WHEN uf.user_id IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
 FROM recipes r
 LEFT JOIN favorites uf ON r.id = uf.recipe_id AND uf.user_id = 1;
+
+SELECT * FROM recipes;
