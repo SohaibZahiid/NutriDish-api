@@ -67,6 +67,10 @@ public class RecipeEntity implements Serializable {
     @NotBlank(message = "Dietary type is required")
     private String dietaryType;
 
+    @Column(name = "instructions")
+    @NotBlank(message = "Instructions is required")
+    private String instructions;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "recipes_ingredients",
