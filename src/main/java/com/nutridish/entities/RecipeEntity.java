@@ -3,6 +3,7 @@ package com.nutridish.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -84,5 +86,25 @@ public class RecipeEntity implements Serializable {
 
     @Transient
     private boolean favorite;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "recipe")
+    private List<RecipeIngredientEntity> recipeIngredients;
+
+    @JsonProperty("ingredients")
+    public List<IngredientWithQuantity> getIngredientsWithQuantity() {
+        List<IngredientWithQuantity> ingredientsWithQuantity = new ArrayList<>();
+
+        for (RecipeIngredientEntity recipeIngredient : recipeIngredients) {
+            IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
+            ingredientWithQuantity.setId(recipeIngredient.getIngredient().getId());
+            ingredientWithQuantity.setName(recipeIngredient.getIngredient().getName());
+            ingredientWithQuantity.setUnit(recipeIngredient.getIngredient().getUnit());
+            ingredientWithQuantity.setQuantity(recipeIngredient.getQuantity());
+            ingredientsWithQuantity.add(ingredientWithQuantity);
+        }
+
+        return ingredientsWithQuantity;
+    }
 
 }
