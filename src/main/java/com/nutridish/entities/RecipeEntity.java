@@ -1,9 +1,10 @@
 package com.nutridish.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nutridish.dto.IngredientWithQuantityDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -96,19 +97,23 @@ public class RecipeEntity implements Serializable {
     private List<RecipeIngredientEntity> recipeIngredients;
 
     @JsonProperty("ingredients")
-    public List<IngredientWithQuantity> getIngredientsWithQuantity() {
-        List<IngredientWithQuantity> ingredientsWithQuantity = new ArrayList<>();
+    public List<IngredientWithQuantityDTO> getIngredientsWithQuantity() {
+        List<IngredientWithQuantityDTO> ingredientsWithQuantity = new ArrayList<>();
 
         for (RecipeIngredientEntity recipeIngredient : recipeIngredients) {
-            IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
-            ingredientWithQuantity.setId(recipeIngredient.getIngredient().getId());
-            ingredientWithQuantity.setName(recipeIngredient.getIngredient().getName());
-            ingredientWithQuantity.setUnit(recipeIngredient.getIngredient().getUnit());
-            ingredientWithQuantity.setQuantity(recipeIngredient.getQuantity());
-            ingredientsWithQuantity.add(ingredientWithQuantity);
+            IngredientWithQuantityDTO ingredientWithQuantityDTO = new IngredientWithQuantityDTO();
+            ingredientWithQuantityDTO.setId(recipeIngredient.getIngredient().getId());
+            ingredientWithQuantityDTO.setName(recipeIngredient.getIngredient().getName());
+            ingredientWithQuantityDTO.setUnit(recipeIngredient.getIngredient().getUnit());
+            ingredientWithQuantityDTO.setQuantity(recipeIngredient.getQuantity());
+            ingredientsWithQuantity.add(ingredientWithQuantityDTO);
         }
 
         return ingredientsWithQuantity;
     }
+
+    @JsonIgnoreProperties("recipe")
+    @OneToMany(mappedBy = "recipe")
+    private List<NutritionEntity> nutritions;
 
 }

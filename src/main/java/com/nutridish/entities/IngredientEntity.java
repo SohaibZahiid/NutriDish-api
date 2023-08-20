@@ -37,4 +37,6 @@ public class IngredientEntity implements Serializable {
     @JsonIgnore
     @ManyToMany(mappedBy = "ingredients")
     private List<RecipeEntity> recipes;
+
+
 }
