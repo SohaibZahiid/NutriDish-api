@@ -113,7 +113,7 @@ public class RecipeEntity implements Serializable {
     }
 
     @JsonIgnoreProperties("recipe")
-    @OneToMany(mappedBy = "recipe")
-    private List<NutritionEntity> nutritions;
+    @OneToOne(mappedBy = "recipe")
+    private NutritionEntity nutrition;
 
 }

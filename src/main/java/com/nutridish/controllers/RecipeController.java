@@ -1,5 +1,6 @@
 package com.nutridish.controllers;
 
+import com.nutridish.dto.MealPlanDTO;
 import com.nutridish.entities.RecipeEntity;
 import com.nutridish.pojos.JsonRes;
 import com.nutridish.services.RecipeService;
@@ -35,6 +36,12 @@ public class RecipeController {
     @GetMapping("/recipes/featured")
     public List<RecipeEntity> getRecipesFeatured() {
         return this.recipeService.getRecipesFeatured();
+    }
+
+
+    @GetMapping("/recipes/suggestions/{calories}")
+    public JsonRes<MealPlanDTO> getMealPlan(@PathVariable Long calories) {
+        return recipeService.getMealPlan(calories);
     }
 
 }

@@ -196,22 +196,73 @@ INSERT INTO nutritions (recipe_id, calories, protein, carbohydrates, fats)
 VALUES
 (1, 300, 15.0, 12.0, 20.0),    -- Vegetable Omelette
 (2, 350, 6.0, 40.0, 18.0),     -- Banana Pancakes
-(3, 250, 10.0, 25.0, 15.0);    -- Smoked Salmon Bagel
+(3, 250, 10.0, 25.0, 15.0),    -- Smoked Salmon Bagel
+(4, 180, 8.0, 20.0, 8.0),
+(5, 300, 14.0, 28.0, 15.0),   -- Ham and Cheese Sandwich
+(6, 220, 5.0, 40.0, 4.0),     -- Berry Smoothie
+(7, 150, 7.0, 5.0, 10.0),     -- Mushroom Scramble
+(8, 250, 12.0, 15.0, 18.0),   -- Bacon and Eggs
+(9, 180, 4.0, 20.0, 10.0),    -- Avocado Toast
+(10, 280, 20.0, 15.0, 18.0),  -- Salmon Frittata
+(11, 300, 16.0, 25.0, 15.0),  -- Chicken Sausage Skillet
+(12, 220, 8.0, 40.0, 5.0),    -- Vegan Oatmeal
+(13, 350, 18.0, 30.0, 18.0),  -- Shrimp and Grits
+(14, 140, 10.0, 15.0, 6.0),   -- Egg White Muffins
+(15, 350, 14.0, 30.0, 20.0),  -- Pork Breakfast Burrito
+(16, 200, 8.0, 25.0, 8.0),    -- Chia Seed Pudding
+(17, 280, 12.0, 20.0, 18.0),  -- Tofu Scramble
+(18, 180, 20.0, 5.0, 9.0),    -- Grilled Mackerel
+(19, 350, 16.0, 30.0, 20.0),  -- Beef Breakfast Sausage
+(20, 220, 10.0, 25.0, 8.0);   -- Coconut Pancakes
 
 -- Insert nutrition information for lunch recipes
 INSERT INTO nutritions (recipe_id, calories, protein, carbohydrates, fats)
 VALUES
 (21, 400, 25.0, 20.0, 22.0),   -- Grilled Chicken Salad
 (22, 350, 15.0, 40.0, 16.0),   -- Vegan Burger
-(23, 200, 10.0, 15.0, 12.0);   -- Shrimp Salad
-
+(23, 200, 10.0, 15.0, 12.0),   -- Shrimp Salad
+(24, 320, 28.0, 15.0, 16.0),  -- Grilled Chicken Salad
+(25, 420, 18.0, 40.0, 20.0),  -- Vegan Burger
+(26, 280, 15.0, 20.0, 18.0),  -- Shrimp Salad
+(27, 380, 22.0, 15.0, 25.0),  -- Chicken Caesar Salad
+(28, 250, 8.0, 35.0, 10.0),   -- Vegetable Stir Fry
+(29, 400, 20.0, 40.0, 20.0),  -- Salmon Poke Bowl
+(30, 450, 28.0, 25.0, 30.0),  -- Lamb Gyros
+(31, 300, 10.0, 35.0, 15.0),  -- Chickpea Curry
+(32, 280, 14.0, 25.0, 15.0),  -- Shrimp Tacos
+(33, 330, 18.0, 30.0, 15.0),  -- Grilled Chicken Wrap
+(34, 280, 10.0, 35.0, 12.0),  -- Vegan Pasta Salad
+(35, 500, 22.0, 45.0, 25.0),  -- Fish and Chips
+(36, 450, 25.0, 30.0, 28.0),  -- Beef Burger
+(37, 300, 12.0, 35.0, 12.0),  -- Roasted Veggie Salad
+(38, 320, 16.0, 40.0, 15.0),  -- Spicy Tuna Roll
+(39, 350, 18.0, 25.0, 20.0),  -- Chicken Noodle Soup
+(40, 280, 12.0, 30.0, 14.0),  -- Vegan Falafel Wrap
+(41, 280, 22.0, 25.0, 12.0),  -- Grilled Sea Bass
+(42, 380, 15.0, 40.0, 18.0),  -- Mushroom Risotto
+(43, 330, 18.0, 20.0, 22.0);  -- Bacon Avocado Salad
 
 -- Insert nutrition information for dinner recipes
 INSERT INTO nutritions (recipe_id, calories, protein, carbohydrates, fats)
 VALUES
-(41, 450, 30.0, 25.0, 24.0),   -- Steak with Vegetables
-(42, 300, 8.0, 35.0, 15.0),    -- Stuffed Bell Peppers
-(43, 350, 20.0, 15.0, 25.0);   -- Grilled Tuna Steak
+(44, 500, 28.0, 20.0, 32.0),  -- Steak with Vegetables
+(45, 300, 12.0, 40.0, 10.0),  -- Stuffed Bell Peppers
+(46, 350, 30.0, 15.0, 18.0),  -- Grilled Tuna Steak
+(47, 400, 18.0, 35.0, 25.0),  -- Beef Stir Fry
+(48, 280, 20.0, 25.0, 14.0),  -- Vegan Tofu Curry
+(49, 450, 20.0, 30.0, 28.0),  -- Shrimp Alfredo Pasta
+(50, 550, 30.0, 35.0, 32.0),  -- Grilled Steak
+(51, 400, 18.0, 30.0, 22.0),  -- Vegetable Lasagna
+(52, 600, 35.0, 45.0, 28.0),  -- Seafood Paella
+(53, 420, 25.0, 25.0, 28.0),  -- BBQ Chicken
+(54, 380, 18.0, 40.0, 18.0),  -- Vegan Buddha Bowl
+(55, 350, 30.0, 10.0, 20.0),  -- Cod with Lemon Butter
+(56, 480, 30.0, 25.0, 30.0),  -- Lamb Chops
+(57, 320, 12.0, 30.0, 18.0),  -- Vegan Potato Soup
+(58, 420, 20.0, 35.0, 22.0),  -- Grilled Tilapia
+(59, 350, 25.0, 25.0, 18.0),  -- Balsamic Glazed Chicken
+(60, 280, 15.0, 30.0, 14.0),  -- Eggplant Parmesan
+(61, 500, 35.0, 15.0, 32.0);  -- Lobster Thermidor
 
 
 
@@ -679,3 +730,33 @@ FROM recipes r
 LEFT JOIN favorites uf ON r.id = uf.recipe_id AND uf.user_id = 1;
 
 SELECT * FROM nutritions;
+
+-- Parameters
+SET @user_calories = 200; -- Replace with the user's calorie requirement
+
+-- Retrieve 1 breakfast recipe
+SELECT
+    B.id AS breakfast_recipe_id, B.name AS breakfast_recipe_name,
+    (SELECT calories FROM nutritions WHERE recipe_id = B.id) AS breakfast_calories
+FROM recipes B
+WHERE B.meal_type = 'breakfast' AND (SELECT calories FROM nutritions WHERE recipe_id = B.id) <= @user_calories
+ORDER BY RAND()
+LIMIT 1;
+
+-- Retrieve 1 lunch recipe
+SELECT
+    L.id AS lunch_recipe_id, L.name AS lunch_recipe_name,
+    (SELECT calories FROM nutritions WHERE recipe_id = L.id) AS lunch_calories
+FROM recipes L
+WHERE L.meal_type = 'lunch' AND (SELECT calories FROM nutritions WHERE recipe_id = L.id) <= @user_calories
+ORDER BY RAND()
+LIMIT 1;
+
+-- Retrieve 1 dinner recipe
+SELECT
+    D.id AS dinner_recipe_id, D.name AS dinner_recipe_name,
+    (SELECT calories FROM nutritions WHERE recipe_id = D.id) AS dinner_calories
+FROM recipes D
+WHERE D.meal_type = 'dinner' AND (SELECT calories FROM nutritions WHERE recipe_id = D.id) <= @user_calories
+ORDER BY RAND()
+LIMIT 1;

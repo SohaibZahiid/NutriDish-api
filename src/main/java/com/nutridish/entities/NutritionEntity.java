@@ -26,7 +26,7 @@ public class NutritionEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "recipe_id")
     private RecipeEntity recipe;
 
