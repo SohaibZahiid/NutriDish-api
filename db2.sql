@@ -261,8 +261,8 @@ VALUES
 (57, 320, 12.0, 30.0, 18.0),  -- Vegan Potato Soup
 (58, 420, 20.0, 35.0, 22.0),  -- Grilled Tilapia
 (59, 350, 25.0, 25.0, 18.0),  -- Balsamic Glazed Chicken
-(60, 280, 15.0, 30.0, 14.0),  -- Eggplant Parmesan
-(61, 500, 35.0, 15.0, 32.0);  -- Lobster Thermidor
+(60, 280, 15.0, 30.0, 14.0);  -- Eggplant Parmesan
+
 
 
 

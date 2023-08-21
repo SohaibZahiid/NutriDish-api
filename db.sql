@@ -78,8 +78,6 @@ CREATE TABLE IF NOT EXISTS favorites (
 );
 
 
-ALTER TABLE recipes ADD instrucciones TEXT;
-
 -- Insert sample data into users table
 INSERT INTO users (name, username, password)
 VALUES
@@ -637,4 +635,35 @@ SELECT r.id, r.name, r.description, r.meal_type, r.image,
 FROM recipes r
 LEFT JOIN favorites uf ON r.id = uf.recipe_id AND uf.user_id = 1;
 
+SELECT 
+    recipes.id AS recipe_id,
+    recipes.name AS recipe_name,
+    ingredients.name AS ingredient_name,
+    recipes_ingredients.quantity AS ingredient_quantity,
+    ingredients.unit AS ingredient_unit
+FROM 
+    recipes
+JOIN 
+    recipes_ingredients ON recipes.id = recipes_ingredients.recipe_id
+JOIN 
+    ingredients ON recipes_ingredients.ingredient_id = ingredients.id
+ORDER BY 
+    recipes.id;
+
+
 SELECT * FROM recipes;
+
+SELECT 
+    recipes.id AS recipe_id,
+    recipes.name AS recipe_name,
+    ingredients.name AS ingredient_name,
+    recipes_ingredients.quantity AS ingredient_quantity,
+    ingredients.unit AS ingredient_unit
+FROM 
+    recipes
+JOIN 
+    recipes_ingredients ON recipes.id = recipes_ingredients.recipe_id
+JOIN 
+    ingredients ON recipes_ingredients.ingredient_id = ingredients.id
+ORDER BY 
+    recipes.id;
