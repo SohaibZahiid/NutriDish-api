@@ -852,3 +852,5 @@ FROM recipes D
 WHERE D.meal_type = 'dinner' AND (SELECT calories FROM nutritions WHERE recipe_id = D.id) <= @user_calories
 ORDER BY RAND()
 LIMIT 1;
+
+SELECT * FROM recipes;
