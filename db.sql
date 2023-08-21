@@ -108,11 +108,11 @@ VALUES
 -- Insert sample data into recipes table
 INSERT INTO recipes (name, description, created_by, total_time, servings, image, meal_type, featured, dietary_type)
 VALUES
-('Vegetable Omelette', 'Delicious omelette filled with vegetables', 'Alice Johnson', 15, 1, 'Receta56.jpg', 'breakfast', 0, 'vegetarian'),
-('Banana Pancakes', 'Fluffy banana pancakes', 'John Smith', 20, 4, 'Receta4.jpg', 'breakfast', 0, 'paleo'),
-('Smoked Salmon Bagel', 'Bagel with smoked salmon and cream cheese', 'Emily Davis', 10, 1, 'Receta41.jpg', 'breakfast', 0, 'pescatarian'),
-('Greek Yogurt Bowl', 'Yogurt with honey, nuts, and fruits', 'James Walker', 5, 1, 'Receta25.jpg', 'breakfast', 0, 'vegetarian'),
-('Ham and Cheese Sandwich', 'Quick ham and cheese sandwich', 'Sandra Lee', 10, 1, 'Receta26.jpg', 'breakfast', 0, 'non vegetarian'),
+('Vegetable Omelette', 'A nutritious omelette packed with a medley of vegetables. This dish is rich in essential vitamins and minerals that come from the vegetables, providing a low-calorie, protein-rich start to your day. Perfect for those looking for a healthy and filling breakfast option.', 'Alice Johnson', 15, 1, 'Receta56.jpg', 'breakfast', 0, 'vegetarian'),
+('Banana Pancakes', 'Soft and fluffy pancakes infused with the natural sweetness of ripe bananas. Not only are they a delightful treat, but bananas also offer a good source of potassium and dietary fiber, making this dish a great balance of indulgence and nutrition.', 'John Smith', 20, 4, 'Receta4.jpg', 'breakfast', 0, 'paleo'),
+('Smoked Salmon Bagel', 'A gourmet bagel topped with velvety smoked salmon and rich cream cheese. Smoked salmon is an excellent source of omega-3 fatty acids, which are beneficial for heart health. Paired with the creamy texture of cheese, this dish is both delicious and nutritionally balanced.', 'Emily Davis', 10, 1, 'Receta41.jpg', 'breakfast', 0, 'pescatarian'),
+('Greek Yogurt Bowl', 'A luscious bowl of Greek yogurt drizzled with honey, garnished with a variety of nuts and fresh fruits. Greek yogurt is a fantastic source of protein and probiotics, which promote gut health. The added nuts provide healthy fats, while the fruits add natural sweetness and a boost of vitamins.', 'James Walker', 5, 1, 'Receta25.jpg', 'breakfast', 0, 'vegetarian'),
+('Ham and Cheese Sandwich', 'A classic quick-fix sandwich with savory ham and melted cheese. Ham provides essential proteins and minerals, while cheese offers calcium and other vital nutrients. This sandwich is an ideal choice for those seeking a quick yet nutritionally wholesome meal.', 'Sandra Lee', 10, 1, 'Receta26.jpg', 'breakfast', 0, 'non vegetarian'),
 ('Berry Smoothie', 'Healthy berry smoothie', 'Brian Adams', 5, 1, 'Receta8.jpg', 'breakfast', 0, 'paleo'),
 ('Mushroom Scramble', 'Mushroom and egg scramble', 'Laura Clark', 10, 2, 'Receta31.jpg', 'breakfast', 0, 'vegetarian'),
 ('Bacon and Eggs', 'Classic bacon and eggs breakfast', 'Kevin Miller', 15, 1, 'Receta1.jpg', 'breakfast', 0, 'non vegetarian'),

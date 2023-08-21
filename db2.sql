@@ -104,16 +104,14 @@ VALUES
 -- Insert sample data into tags table
 INSERT INTO tags (name)
 VALUES
-	('Gluten-Free'),
-    ('Keto'),
-    ('Paleo'),
-    ('Dessert'),
-    ('Quick & Easy'),
-    ('Comfort Food'),
-    ('Low Calorie'),
-    ('Asian'),
-    ('Mediterranean'),
-    ('Mexican');
+	('Lácteos'),
+	('Gluten'),
+	('Frutos secos'),
+	('Soja'),
+	('Huevos'),
+	('Cacahuetes');
+
+
 
 INSERT INTO user_tags (user_id, tag_id)
 VALUES
@@ -124,11 +122,11 @@ VALUES
 -- Insert sample data into recipes table
 INSERT INTO recipes (name, description, created_by, total_time, servings, image, meal_type, featured, dietary_type)
 VALUES
-('Vegetable Omelette', 'Delicious omelette filled with vegetables', 'Alice Johnson', 15, 1, 'Receta56.jpg', 'breakfast', 0, 'vegetarian'),
-('Banana Pancakes', 'Fluffy banana pancakes', 'John Smith', 20, 4, 'Receta4.jpg', 'breakfast', 0, 'paleo'),
-('Smoked Salmon Bagel', 'Bagel with smoked salmon and cream cheese', 'Emily Davis', 10, 1, 'Receta41.jpg', 'breakfast', 0, 'pescatarian'),
-('Greek Yogurt Bowl', 'Yogurt with honey, nuts, and fruits', 'James Walker', 5, 1, 'Receta25.jpg', 'breakfast', 0, 'vegetarian'),
-('Ham and Cheese Sandwich', 'Quick ham and cheese sandwich', 'Sandra Lee', 10, 1, 'Receta26.jpg', 'breakfast', 0, 'non vegetarian'),
+('Vegetable Omelette', 'A nutritious omelette packed with a medley of vegetables. This dish is rich in essential vitamins and minerals that come from the vegetables, providing a low-calorie, protein-rich start to your day. Perfect for those looking for a healthy and filling breakfast option.', 'Alice Johnson', 15, 1, 'Receta56.jpg', 'breakfast', 0, 'vegetarian'),
+('Banana Pancakes', 'Soft and fluffy pancakes infused with the natural sweetness of ripe bananas. Not only are they a delightful treat, but bananas also offer a good source of potassium and dietary fiber, making this dish a great balance of indulgence and nutrition.', 'John Smith', 20, 4, 'Receta4.jpg', 'breakfast', 0, 'paleo'),
+('Smoked Salmon Bagel', 'A gourmet bagel topped with velvety smoked salmon and rich cream cheese. Smoked salmon is an excellent source of omega-3 fatty acids, which are beneficial for heart health. Paired with the creamy texture of cheese, this dish is both delicious and nutritionally balanced.', 'Emily Davis', 10, 1, 'Receta41.jpg', 'breakfast', 0, 'pescatarian'),
+('Greek Yogurt Bowl', 'A luscious bowl of Greek yogurt drizzled with honey, garnished with a variety of nuts and fresh fruits. Greek yogurt is a fantastic source of protein and probiotics, which promote gut health. The added nuts provide healthy fats, while the fruits add natural sweetness and a boost of vitamins.', 'James Walker', 5, 1, 'Receta25.jpg', 'breakfast', 0, 'vegetarian'),
+('Ham and Cheese Sandwich', 'A classic quick-fix sandwich with savory ham and melted cheese. Ham provides essential proteins and minerals, while cheese offers calcium and other vital nutrients. This sandwich is an ideal choice for those seeking a quick yet nutritionally wholesome meal.', 'Sandra Lee', 10, 1, 'Receta26.jpg', 'breakfast', 0, 'non vegetarian'),
 ('Berry Smoothie', 'Healthy berry smoothie', 'Brian Adams', 5, 1, 'Receta8.jpg', 'breakfast', 0, 'paleo'),
 ('Mushroom Scramble', 'Mushroom and egg scramble', 'Laura Clark', 10, 2, 'Receta31.jpg', 'breakfast', 0, 'vegetarian'),
 ('Bacon and Eggs', 'Classic bacon and eggs breakfast', 'Kevin Miller', 15, 1, 'Receta1.jpg', 'breakfast', 0, 'non vegetarian'),
@@ -147,12 +145,12 @@ VALUES
 
 
 -- Lunch
-('Grilled Chicken Salad', 'Healthy salad with grilled chicken', 'Michael Johnson', 20, 2, 'Receta20.jpg', 'lunch', 0, 'non vegetarian'),
-('Vegan Burger', 'Delicious vegan burger with fries', 'Sara Lee', 30, 1, 'Receta47.jpg', 'lunch', 0, 'vegetarian'),
-('Shrimp Salad', 'Fresh salad with shrimp and avocado', 'David Kim', 15, 2, 'Receta39.jpg', 'lunch', 0, 'pescatarian'),
-('Chicken Caesar Salad', 'Crispy romaine with chicken and Caesar dressing', 'Luisa Hernandez', 15, 1, 'Receta9.jpg', 'lunch', 0, 'non vegetarian'),
-('Vegetable Stir Fry', 'Mixed vegetable stir fry with soy sauce', 'Diego Sanchez', 20, 2, 'Receta54.jpg', 'lunch', 0, 'vegetarian'),
-('Salmon Poke Bowl', 'Salmon, rice, and veggies with poke sauce', 'Antonio Gomez', 20, 1, 'Receta35.jpg', 'lunch', 0, 'pescatarian'),
+('Grilled Chicken Salad', 'Dive into a nutritious blend of succulent grilled chicken, fresh garden greens, and a medley of colorful vegetables. This salad is not only a visual treat but also a protein-packed meal that keeps you energized throughout the day.', 'Michael Johnson', 20, 2, 'Receta20.jpg', 'lunch', 0, 'non vegetarian'),
+('Vegan Burger', 'Experience the ultimate blend of flavors with our Vegan Burger. Made with a hearty plant-based patty, fresh lettuce, tomatoes, and tangy vegan sauce, its served with crispy fries. A delicious, guilt-free indulgence thats as kind to your taste buds as it is to the environment!', 'Sara Lee', 30, 1, 'Receta47.jpg', 'lunch', 0, 'vegetarian'),
+('Shrimp Salad', 'Refresh your palate with this tantalizing shrimp salad. Juicy shrimp are paired with creamy avocado, crunchy cucumbers, and a zesty lime dressing. A low-calorie delight thats rich in omega-3 and essential nutrients.', 'David Kim', 15, 2, 'Receta39.jpg', 'lunch', 0, 'pescatarian'),
+('Chicken Caesar Salad', 'Indulge in the classic taste of our Chicken Caesar Salad. Crispy romaine lettuce, succulent grilled chicken, shaved parmesan, and crunchy croutons, all drizzled with a rich Caesar dressing. A protein-rich meal thats both delicious and heart-healthy.', 'Luisa Hernandez', 15, 1, 'Receta9.jpg', 'lunch', 0, 'non vegetarian'),
+('Vegetable Stir Fry', 'Savor the authentic flavors of our Vegetable Stir Fry. A vibrant mix of fresh vegetables sautéed to perfection in a savory soy sauce. This fiber-rich delight is a perfect combination of taste and nutrition, ensuring you get your daily dose of vitamins and minerals.', 'Diego Sanchez', 20, 2, 'Receta54.jpg', 'lunch', 0, 'vegetarian'),
+('Salmon Poke Bowl', 'Dive into the tropical flavors of our Salmon Poke Bowl. Fresh chunks of salmon, perfectly cooked rice, and an assortment of veggies, all brought together with a tangy poke sauce. Rich in omega-3 and essential fatty acids, its a bowlful of health and flavor.', 'Antonio Gomez', 20, 1, 'Receta35.jpg', 'lunch', 0, 'pescatarian'),
 ('Lamb Gyros', 'Sliced lamb with tzatziki in pita bread', 'Maria Torres', 30, 2, 'Receta28.jpg', 'lunch', 0, 'non vegetarian'),
 ('Chickpea Curry', 'Spicy chickpea and tomato curry', 'Jose Ramos', 30, 4, 'Receta12.jpg', 'lunch', 0, 'vegetarian'),
 ('Shrimp Tacos', 'Shrimp with slaw in soft tortilla', 'Laura Garcia', 20, 2, 'Receta40.jpg', 'lunch', 0, 'pescatarian'),
@@ -169,12 +167,12 @@ VALUES
 ('Bacon Avocado Salad', 'Greens with bacon, avocado, and vinaigrette', 'Marta Vazquez', 15, 2, 'Receta2.jpg', 'lunch', 0, 'paleo'),
 
 -- Dinner
-('Steak with Vegetables', 'Grilled steak with roasted vegetables', 'Chris Williams', 40, 2, 'Receta43.jpg', 'dinner', 0, 'non vegetarian'),
-('Stuffed Bell Peppers', 'Bell peppers stuffed with quinoa and vegetables', 'Jennifer Taylor', 45, 4, 'Receta44.jpg', 'dinner', 0, 'vegetarian'),
-('Grilled Tuna Steak', 'Grilled tuna steak with lemon butter', 'Robert Brown', 30, 2, 'Receta24.jpg', 'dinner', 0, 'pescatarian'),
-('Beef Stir Fry', 'Beef with vegetables in a savory sauce', 'Lorenzo Navarro', 30, 2, 'Receta7.jpg', 'dinner', 0, 'non vegetarian'),
-('Vegan Tofu Curry', 'Tofu with vegetables in a curry sauce', 'Rosa Soto', 35, 4, 'Receta52.jpg', 'dinner', 0, 'vegetarian'),
-('Shrimp Alfredo Pasta', 'Creamy Alfredo pasta with sautéed shrimp', 'Carlos Vargas', 30, 2, 'Receta37.jpg', 'dinner', 0, 'pescatarian'),
+('Steak with Vegetables', 'Relish a succulent grilled steak, seared to perfection and paired with an array of roasted vegetables. This wholesome dish offers a rich source of protein and essential vitamins, providing both taste and nutrition in every bite.', 'Chris Williams', 40, 2, 'Receta43.jpg', 'dinner', 0, 'non vegetarian'),
+('Stuffed Bell Peppers', 'Dive into the delightful flavors of bell peppers generously stuffed with a hearty mix of quinoa and fresh vegetables. This dish is a celebration of colors and textures, offering a high fiber and protein-packed meal thats as delicious as it is nutritious.', 'Jennifer Taylor', 45, 4, 'Receta44.jpg', 'dinner', 0, 'vegetarian'),
+('Grilled Tuna Steak', 'Dive into the oceans finest with our Grilled Tuna Steak. Expertly grilled to seal in its natural flavors, its drizzled with a zesty lemon butter that enhances its rich taste. A lean source of protein, this dish is as nutritious as it is delicious.', 'Robert Brown', 30, 2, 'Receta24.jpg', 'dinner', 0, 'pescatarian'),
+('Beef Stir Fry', 'Experience the oriental flavors of our Beef Stir Fry. Juicy strips of beef, stir-fried with a medley of crunchy vegetables in a rich savory sauce. This dish provides a protein-packed punch, ensuring you get a perfect mix of taste and nutrition.', 'Lorenzo Navarro', 30, 2, 'Receta7.jpg', 'dinner', 0, 'non vegetarian'),
+('Vegan Tofu Curry', 'Immerse yourself in the exotic flavors of our Vegan Tofu Curry. Silken tofu cubes simmered with an assortment of vegetables in a fragrant curry sauce. A vegan delight thats rich in plant-based protein and brimming with aromatic spices.', 'Rosa Soto', 35, 4, 'Receta52.jpg', 'dinner', 0, 'vegetarian'),
+('Shrimp Alfredo Pasta', 'Indulge in the creamy goodness of our Shrimp Alfredo Pasta. Al dente pasta enveloped in a velvety Alfredo sauce, topped with succulent sautéed shrimp. A decadent dish thats rich in flavor and offers a generous dose of protein and omega-3.', 'Carlos Vargas', 30, 2, 'Receta37.jpg', 'dinner', 0, 'pescatarian'),
 ('Grilled Steak', 'Juicy grilled steak with pepper sauce', 'Emilio Paredes', 25, 1, 'Receta23.jpg', 'dinner', 1, 'non vegetarian'),
 ('Vegetable Lasagna', 'Layered lasagna with vegetables and cheese', 'Sofia Duarte', 60, 6, 'Receta53.jpg', 'dinner', 1, 'vegetarian'),
 ('Seafood Paella', 'Rice dish with mixed seafood', 'Juan Cordero', 45, 4, 'Receta36.jpg', 'dinner', 0, 'pescatarian'),
@@ -189,6 +187,101 @@ VALUES
 ('Lobster Thermidor', 'Lobster with cheese and brandy sauce', 'Javier Rodriguez', 50, 2, 'Receta29.jpg', 'dinner', 0, 'pescatarian'),
 ('Turkey Meatloaf', 'Homemade turkey meatloaf', 'Andrea Fernandez', 60, 6, 'Receta61.jpg', 'dinner', 0, 'non vegetarian'),
 ('Zucchini Noodles', 'Zucchini noodles with pesto sauce', 'David Romero', 20, 2, 'Receta55.jpg', 'dinner', 0, 'paleo');
+
+-- Update dietary type for each recipie
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Vegetable Omelette';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Banana Pancakes';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Smoked Salmon Bagel';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Greek Yogurt Bowl';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Ham and Cheese Sandwich';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Berry Smoothie';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Mushroom Scramble';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Bacon and Eggs';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Avocado Toast';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Salmon Frittata';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Chicken Sausage Skillet';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Oatmeal';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Shrimp and Grits';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Egg White Muffins';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Pork Breakfast Burrito';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Chia Seed Pudding';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Tofu Scramble';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Grilled Mackerel';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Beef Breakfast Sausage';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Coconut Pancakes';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Grilled Chicken Salad';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Burger';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Shrimp Salad';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Chicken Caesar Salad';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegetable Stir Fry';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Salmon Poke Bowl';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Lamb Gyros';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Chickpea Curry';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Shrimp Tacos';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Grilled Chicken Wrap';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Pasta Salad';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Fish and Chips';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Beef Burger';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Roasted Veggie Salad';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Spicy Tuna Roll';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Chicken Noodle Soup';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Falafel Wrap';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Grilled Sea Bass';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Mushroom Risotto';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Bacon Avocado Salad';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Steak with Vegetables';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Stuffed Bell Peppers';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Grilled Tuna Steak';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Beef Stir Fry';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Tofu Curry';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Shrimp Alfredo Pasta';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Grilled Steak';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Vegetable Lasagna';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Seafood Paella';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'BBQ Chicken';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Buddha Bowl';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Cod with Lemon Butter';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Lamb Chops';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Vegan Potato Soup';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Grilled Tilapia';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Balsamic Glazed Chicken';
+UPDATE recipes SET dietary_type = 'vegetarian' WHERE name = 'Eggplant Parmesan';
+UPDATE recipes SET dietary_type = 'pescatarian' WHERE name = 'Lobster Thermidor';
+UPDATE recipes SET dietary_type = 'non-vegetarian' WHERE name = 'Turkey Meatloaf';
+UPDATE recipes SET dietary_type = 'vegan' WHERE name = 'Zucchini Noodles';
+
+
+-- Insertar relaciones entre comidas y alérgenos en la tabla recipe_tags
+INSERT INTO recipe_tags (recipe_id, tag_id)
+VALUES
+    (1, 5),  -- Vegetable Omelette contiene Huevos
+    (1, 1),  -- Vegetable Omelette contiene Lácteos
+    (2, 2),  -- Banana Pancakes contiene Gluten
+    (3, 2),  -- Smoked Salmon Bagel contiene Gluten
+    (3, 5),  -- Smoked Salmon Bagel contiene Huevos
+    (4, 1),  -- Greek Yogurt Bowl contiene Lácteos
+    (4, 3),  -- Greek Yogurt Bowl contiene Frutos secos
+    (5, 2),  -- Ham and Cheese Sandwich contiene Gluten
+    (5, 1),  -- Ham and Cheese Sandwich contiene Lácteos
+
+    (21, 2),  -- Grilled Chicken Salad contiene Gluten
+    (22, 4),  -- Vegan Burger contiene Soja
+    (23, 6),  -- Shrimp Salad contiene Cacahuetes
+    (24, 2),  -- Chicken Caesar Salad contiene Gluten
+    (25, 4),  -- Vegetable Stir Fry contiene Soja
+    (26, 2),  -- Salmon Poke Bowl contiene Gluten
+    (26, 5),  -- Salmon Poke Bowl contiene Huevos
+
+    (41, 2),  -- Steak with Vegetables contiene Gluten
+    (41, 1),  -- Steak with Vegetables contiene Lácteos
+    (42, 3),  -- Stuffed Bell Peppers contiene Frutos secos
+    (42, 4),  -- Stuffed Bell Peppers contiene Soja
+    (43, 5),  -- Grilled Tuna Steak contiene Huevos
+    (44, 2),  -- Beef Stir Fry contiene Gluten
+    (45, 4),  -- Vegan Tofu Curry contiene Soja
+    (46, 1),  -- Shrimp Alfredo Pasta contiene Lácteos
+    (46, 2);  -- Shrimp Alfredo Pasta contiene Gluten
+
 
 
 -- Insert nutrition information for breakfast recipes
@@ -705,10 +798,9 @@ UPDATE recipes
 SET instructions = 'Press the tofu to remove excess water and then cube it. In a large pan or wok, heat olive oil or coconut oil over medium heat. Add the minced garlic and grated ginger, and sauté for 1-2 minutes. Add the sliced red bell pepper, carrots, broccoli florets, snow peas, and red onion. Stir fry for 5-7 minutes or until vegetables are slightly tender. Add the tofu cubes to the pan and stir gently. Pour in the coconut milk and add curry powder and turmeric. Mix well. Let the curry simmer for 10-15 minutes, allowing flavors to meld. Season with salt and pepper to taste. Garnish with fresh cilantro before serving. Serve with steamed rice or quinoa.'
 WHERE id = 45;
 
-SELECT * FROM users;
-SELECT * FROM favorites;
+SELECT id, name, meal_type, description FROM recipes;
 
-
+SELECT * FROM TAGS;
 SELECT 
     r.name AS 'Receta',
     i.name AS 'Ingrediente',
