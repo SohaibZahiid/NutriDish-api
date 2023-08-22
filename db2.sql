@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS nutritions (
 -- Insert sample data into users table
 INSERT INTO users (name, username, password)
 VALUES
-    ('Michael Johnson', 'michaelj', 'securepassword'),
+    ('Michael Johnson', 'Michaelj', 'securepassword'),
     ('Emily Brown', 'emilyb', 'safepass123');
 
 
@@ -263,7 +263,53 @@ VALUES
     (4, 3),  -- Greek Yogurt Bowl contiene Frutos secos
     (5, 2),  -- Ham and Cheese Sandwich contiene Gluten
     (5, 1),  -- Ham and Cheese Sandwich contiene Lácteos
+    (6, 2),  -- Berry Smoothie contiene Gluten
+    (6, 3),  -- Berry Smoothie contiene Frutos secos
+    (6, 1),  -- Berry Smoothie contiene Lácteos
+    (7, 5),  -- Mushroom Scramble contiene Huevos
+    (7, 1),  -- Mushroom Scramble contiene Lácteos
+    (7, 3),  -- Mushroom Scramble contiene Frutos secos
+    (8, 5),  -- Bacon and Eggs contiene Huevos
+    (8, 2),  -- Bacon and Eggs contiene Gluten
+    (8, 6),  -- Bacon and Eggs contiene Cacahuetes
+    (9, 2),  -- Avocado Toast contiene Gluten
+    (9, 3),  -- Avocado Toast contiene Frutos secos
+    (9, 1),  -- Avocado Toast contiene Lácteos
+    (10, 2), -- Salmon Frittata contiene Gluten
+    (10, 5), -- Salmon Frittata contiene Huevos
+    (10, 4), -- Salmon Frittata contiene Soja
+    (11, 2), -- Chicken Sausage Skillet contiene Gluten
+    (11, 6), -- Chicken Sausage Skillet contiene Cacahuetes
+    (11, 3), -- Chicken Sausage Skillet contiene Frutos secos
+    (12, 1), -- Vegan Oatmeal contiene Lácteos
+    (12, 4), -- Vegan Oatmeal contiene Soja
+    (12, 2), -- Vegan Oatmeal contiene Gluten
+    (13, 2), -- Shrimp and Grits contiene Gluten
+    (13, 1), -- Shrimp and Grits contiene Lácteos
+    (13, 3), -- Shrimp and Grits contiene Frutos secos
+    (14, 5), -- Egg White Muffins contiene Huevos
+    (14, 4), -- Egg White Muffins contiene Soja
+    (14, 2), -- Egg White Muffins contiene Gluten
+    (15, 2), -- Pork Breakfast Burrito contiene Gluten
+    (15, 6), -- Pork Breakfast Burrito contiene Cacahuetes
+    (15, 1), -- Pork Breakfast Burrito contiene Lácteos
+    (16, 1), -- Chia Seed Pudding contiene Lácteos
+    (16, 3), -- Chia Seed Pudding contiene Frutos secos
+    (16, 2), -- Chia Seed Pudding contiene Gluten
+    (17, 5), -- Tofu Scramble contiene Huevos
+    (17, 4), -- Tofu Scramble contiene Soja
+    (17, 3), -- Tofu Scramble contiene Frutos secos
+    (18, 1), -- Grilled Mackerel contiene Lácteos
+    (18, 2), -- Grilled Mackerel contiene Gluten
+    (18, 4), -- Grilled Mackerel contiene Soja
+    (19, 2), -- Beef Breakfast Sausage contiene Gluten
+    (19, 6), -- Beef Breakfast Sausage contiene Cacahuetes
+    (19, 1), -- Beef Breakfast Sausage contiene Lácteos
+    (20, 1), -- Coconut Pancakes contiene Lácteos
+    (20, 3), -- Coconut Pancakes contiene Frutos secos
+    (20, 2),-- Coconut Pancakes contiene Gluten
 
+	-- LUNCH
     (21, 2),  -- Grilled Chicken Salad contiene Gluten
     (22, 4),  -- Vegan Burger contiene Soja
     (23, 6),  -- Shrimp Salad contiene Cacahuetes
@@ -271,7 +317,41 @@ VALUES
     (25, 4),  -- Vegetable Stir Fry contiene Soja
     (26, 2),  -- Salmon Poke Bowl contiene Gluten
     (26, 5),  -- Salmon Poke Bowl contiene Huevos
+    (27, 5), -- Lamb Gyros contains Huevos
+    (27, 6), -- Lamb Gyros contains Cacahuetes
+    (28, 3), -- Chickpea Curry contains Frutos secos
+    (28, 4), -- Chickpea Curry contains Soja
+    (29, 6), -- Shrimp Tacos contains Cacahuetes
+    (29, 5), -- Shrimp Tacos contains Huevos
+    (29, 4), -- Shrimp Tacos contains Soja
+    (30, 6), -- Grilled Chicken Wrap contains Cacahuetes
+    (30, 2), -- Grilled Chicken Wrap contains Gluten
+    (31, 4), -- Vegan Pasta Salad contains Soja
+    (31, 3), -- Vegan Pasta Salad contains Frutos secos
+    (32, 5), -- Fish and Chips contains Huevos
+    (32, 2), -- Fish and Chips contains Gluten
+    (33, 5), -- Beef Burger contains Huevos
+    (33, 2), -- Beef Burger contains Gluten
+    (33, 4), -- Beef Burger contains Soja
+    (34, 6), -- Roasted Veggie Salad contains Cacahuetes
+    (35, 2), -- Spicy Tuna Roll contains Gluten
+    (35, 5), -- Spicy Tuna Roll contains Huevos
+    (36, 3), -- Chicken Noodle Soup contains Frutos secos
+    (36, 2), -- Chicken Noodle Soup contains Gluten
+    (36, 6), -- Chicken Noodle Soup contains Cacahuetes
+    (37, 1), -- Vegan Falafel Wrap contains Lácteos
+    (37, 2), -- Vegan Falafel Wrap contains Gluten
+    (38, 6), -- Grilled Sea Bass contains Cacahuetes
+    (38, 1), -- Grilled Sea Bass contains Lácteos
+    (38, 2), -- Grilled Sea Bass contains Gluten
+    (39, 3), -- Mushroom Risotto contains Frutos secos
+    (39, 5), -- Mushroom Risotto contains Huevos
+    (40, 6), -- Bacon Avocado Salad contains Cacahuetes
+    (40, 2), -- Bacon Avocado Salad contains Gluten
+    (40, 3), -- Bacon Avocado Salad contains Frutos secos
 
+
+	-- DINNER
     (41, 2),  -- Steak with Vegetables contiene Gluten
     (41, 1),  -- Steak with Vegetables contiene Lácteos
     (42, 3),  -- Stuffed Bell Peppers contiene Frutos secos
@@ -280,7 +360,31 @@ VALUES
     (44, 2),  -- Beef Stir Fry contiene Gluten
     (45, 4),  -- Vegan Tofu Curry contiene Soja
     (46, 1),  -- Shrimp Alfredo Pasta contiene Lácteos
-    (46, 2);  -- Shrimp Alfredo Pasta contiene Gluten
+    (46, 2),  -- Shrimp Alfredo Pasta contiene Gluten
+    (47, 3), -- Grilled Steak contains Frutos secos
+    (47, 5), -- Grilled Steak contains Huevos
+    (48, 1), -- Vegetable Lasagna contains Lácteos
+    (48, 2), -- Vegetable Lasagna contains Gluten
+    (48, 6), -- Vegetable Lasagna contains Cacahuetes
+    (49, 5), -- Seafood Paella contains Huevos
+    (49, 3), -- Seafood Paella contains Frutos secos
+    (50, 2), -- BBQ Chicken contains Gluten
+    (51, 3), -- Vegan Buddha Bowl contains Frutos secos
+    (51, 5), -- Vegan Buddha Bowl contains Huevos
+    (51, 4), -- Vegan Buddha Bowl contains Soja
+    (52, 6), -- Cod with Lemon Butter contains Cacahuetes
+    (53, 2), -- Lamb Chops contains Gluten
+    (54, 4), -- Vegan Potato Soup contains Soja
+    (54, 1), -- Vegan Potato Soup contains Lácteos
+    (55, 3), -- Grilled Tilapia contains Frutos secos
+    (56, 2), -- Balsamic Glazed Chicken contains Gluten
+    (56, 1), -- Balsamic Glazed Chicken contains Lácteos
+    (57, 6), -- Eggplant Parmesan contains Cacahuetes
+    (57, 2), -- Eggplant Parmesan contains Gluten
+    (58, 6), -- Lobster Thermidor contains Cacahuetes
+    (59, 6), -- Turkey Meatloaf contains Cacahuetes
+    (60, 6); -- Zucchini Noodles contains Cacahuetes
+
 
 
 
