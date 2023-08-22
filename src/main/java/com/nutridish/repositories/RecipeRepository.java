@@ -35,4 +35,6 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
     List<RecipeEntity> findByIdInAndDietaryTypeIn(List<Long> ids, List<String> tags);
 
     List<RecipeEntity> findByIdIn(List<Long> ids);
+
+    List<RecipeEntity> findByMealTypeAndDietaryType(String type, String dietary);
 }

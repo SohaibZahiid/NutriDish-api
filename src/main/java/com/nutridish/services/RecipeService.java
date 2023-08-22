@@ -64,11 +64,11 @@ public class RecipeService {
         return recipeRepository.findTop4ByFeaturedTrue();
     }
 
-    public JsonRes<MealPlanDTO> getMealPlan(Long calories) {
+    public JsonRes<MealPlanDTO> getMealPlan(Long calories, String dietary) {
 
-        List<RecipeEntity> breakfasts = recipeRepository.findByMealType("breakfast");
-        List<RecipeEntity> lunches = recipeRepository.findByMealType("lunch");
-        List<RecipeEntity> dinners = recipeRepository.findByMealType("dinner");
+        List<RecipeEntity> breakfasts = recipeRepository.findByMealTypeAndDietaryType("breakfast", dietary);
+        List<RecipeEntity> lunches = recipeRepository.findByMealTypeAndDietaryType("lunch", dietary);
+        List<RecipeEntity> dinners = recipeRepository.findByMealTypeAndDietaryType("dinner", dietary);
 
         // Define the percentage of calories for each meal
         double breakfastPercentage = 0.33;  // 25%
@@ -80,9 +80,9 @@ public class RecipeService {
         Long lunchCalories = Math.round(calories * lunchPercentage);
         Long dinnerCalories = Math.round(calories * dinnerPercentage);
 
-        RecipeEntity selectedBreakfast = selectRecipe(breakfasts, breakfastCalories);
-        RecipeEntity selectedLunch = selectRecipe(lunches, lunchCalories);
-        RecipeEntity selectedDinner = selectRecipe(dinners, dinnerCalories);
+        RecipeEntity selectedBreakfast = selectRecipe(breakfasts, breakfastCalories, dietary);
+        RecipeEntity selectedLunch = selectRecipe(lunches, lunchCalories, dietary);
+        RecipeEntity selectedDinner = selectRecipe(dinners, dinnerCalories, dietary);
 
         if(selectedDinner != null && selectedBreakfast != null && selectedLunch != null) {
             MealPlanDTO mealPlanDTO = new MealPlanDTO();
@@ -95,12 +95,12 @@ public class RecipeService {
         return new JsonRes<>(false, 404, "Recipes not found", null);
     }
 
-    private RecipeEntity selectRecipe(List<RecipeEntity> recipes, Long calories) {
+    private RecipeEntity selectRecipe(List<RecipeEntity> recipes, Long calories, String dietary) {
         List<RecipeEntity> candidates = new ArrayList<>();
         Random random = new Random();
 
         for (RecipeEntity recipe : recipes) {
-            if (calculateCombinedCalories(recipe) <= calories) {
+            if (calculateCombinedCalories(recipe) <= calories && recipe.getDietaryType().equals(dietary)) {
                 candidates.add(recipe);
             }
         }

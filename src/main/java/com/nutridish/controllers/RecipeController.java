@@ -39,9 +39,9 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/recipes/suggestions/{calories}")
-    public JsonRes<MealPlanDTO> getMealPlan(@PathVariable Long calories) {
-        return recipeService.getMealPlan(calories);
+    @GetMapping("/recipes/suggestions/{calories}/{dietary}")
+    public JsonRes<MealPlanDTO> getMealPlan(@PathVariable Long calories, @PathVariable String dietary) {
+        return recipeService.getMealPlan(calories, dietary);
     }
 
 }
