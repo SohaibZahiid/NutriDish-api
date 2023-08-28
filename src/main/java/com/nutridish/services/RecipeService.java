@@ -12,6 +12,7 @@ import com.nutridish.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,71 +65,66 @@ public class RecipeService {
         return recipeRepository.findTop4ByFeaturedTrue();
     }
 
-    public JsonRes<MealPlanDTO> getMealPlan(Long calories, String dietary) {
+    public JsonRes<MealPlanDTO> getMealPlan(Long desiredCalories, String desiredDietaryType) {
+        List<RecipeEntity> matchingRecipes = recipeRepository.findByDietaryTypeIgnoreCase(desiredDietaryType);
+        List<MealPlanDTO> validMealPlans = new ArrayList<>();
 
-        List<RecipeEntity> breakfasts = recipeRepository.findByMealTypeAndDietaryType("breakfast", dietary);
-        List<RecipeEntity> lunches = recipeRepository.findByMealTypeAndDietaryType("lunch", dietary);
-        List<RecipeEntity> dinners = recipeRepository.findByMealTypeAndDietaryType("dinner", dietary);
+        List<RecipeEntity> breakfastRecipes = matchingRecipes.stream()
+                .filter(recipe -> recipe.getMealType().equalsIgnoreCase("breakfast"))
+                .toList();
 
-        // Define the percentage of calories for each meal
-        double breakfastPercentage = 0.33;  // 25%
-        double lunchPercentage = 0.33;      // 35%
-        double dinnerPercentage = 0.33;     // 40%
+        List<RecipeEntity> lunchRecipes = matchingRecipes.stream()
+                .filter(recipe -> recipe.getMealType().equalsIgnoreCase("lunch"))
+                .toList();
 
-        // Calculate calories for each meal based on percentages
-        Long breakfastCalories = Math.round(calories * breakfastPercentage);
-        Long lunchCalories = Math.round(calories * lunchPercentage);
-        Long dinnerCalories = Math.round(calories * dinnerPercentage);
+        List<RecipeEntity> dinnerRecipes = matchingRecipes.stream()
+                .filter(recipe -> recipe.getMealType().equalsIgnoreCase("dinner"))
+                .toList();
 
-        RecipeEntity selectedBreakfast = selectRecipe(breakfasts, breakfastCalories, dietary);
-        RecipeEntity selectedLunch = selectRecipe(lunches, lunchCalories, dietary);
-        RecipeEntity selectedDinner = selectRecipe(dinners, dinnerCalories, dietary);
+        for (RecipeEntity breakfast : breakfastRecipes) {
+            for (RecipeEntity lunch : lunchRecipes) {
+                for (RecipeEntity dinner : dinnerRecipes) {
+                    NutritionEntity breakfastNutrition = breakfast.getNutrition();
+                    NutritionEntity lunchNutrition = lunch.getNutrition();
+                    NutritionEntity dinnerNutrition = dinner.getNutrition();
 
-        if(selectedDinner != null && selectedBreakfast != null && selectedLunch != null) {
-            MealPlanDTO mealPlanDTO = new MealPlanDTO();
-            mealPlanDTO.setRecipes(Arrays.asList(selectedBreakfast, selectedLunch, selectedDinner));
-            mealPlanDTO.setCombinedNutrition(calculateCombinedNutrition(selectedBreakfast, selectedLunch, selectedDinner));
+                    long totalCalories = breakfastNutrition.getCalories()
+                            + lunchNutrition.getCalories()
+                            + dinnerNutrition.getCalories();
 
-            return new JsonRes<>(true, 200, "Recipes found", mealPlanDTO);
-        }
+                    if (totalCalories == desiredCalories) {
+                        MealPlanDTO mealPlan = new MealPlanDTO();
+                        mealPlan.setRecipes(Arrays.asList(breakfast, lunch, dinner));
 
-        return new JsonRes<>(false, 404, "Recipes not found", null);
-    }
+                        BigDecimal totalProtein = breakfastNutrition.getProtein()
+                                .add(lunchNutrition.getProtein())
+                                .add(dinnerNutrition.getProtein());
 
-    private RecipeEntity selectRecipe(List<RecipeEntity> recipes, Long calories, String dietary) {
-        List<RecipeEntity> candidates = new ArrayList<>();
-        Random random = new Random();
+                        BigDecimal totalCarbohydrates = breakfastNutrition.getCarbohydrates()
+                                .add(lunchNutrition.getCarbohydrates())
+                                .add(dinnerNutrition.getCarbohydrates());
 
-        for (RecipeEntity recipe : recipes) {
-            if (calculateCombinedCalories(recipe) <= calories && recipe.getDietaryType().equals(dietary)) {
-                candidates.add(recipe);
+                        BigDecimal totalFats = breakfastNutrition.getFats()
+                                .add(lunchNutrition.getFats())
+                                .add(dinnerNutrition.getFats());
+
+                        NutritionEntity combinedNutrition = new NutritionEntity(
+                                totalCalories, totalProtein, totalCarbohydrates, totalFats);
+                        mealPlan.setCombinedNutrition(combinedNutrition);
+
+                        validMealPlans.add(mealPlan);
+                    }
+                }
             }
         }
 
-        if (candidates.isEmpty()) {
-            return null; // No suitable recipe found
+        if (validMealPlans.isEmpty()) {
+            return new JsonRes<>(false, 404, "Recipes not found", null);
         }
 
-        int randomIndex = random.nextInt(candidates.size());
-        return candidates.get(randomIndex);
-    }
+        MealPlanDTO selectedMealPlan = validMealPlans.get(new Random().nextInt(validMealPlans.size()));
 
-    private Long calculateCombinedCalories(RecipeEntity recipe) {
-        Long combinedCalories = 0L;
-        if (recipe.getNutrition() != null) {
-            combinedCalories += recipe.getNutrition().getCalories();
-        }
-        return combinedCalories;
-    }
-
-    private NutritionEntity calculateCombinedNutrition(RecipeEntity breakfast, RecipeEntity lunch, RecipeEntity dinner) {
-        NutritionEntity combinedNutrition = new NutritionEntity();
-        combinedNutrition.setCalories(breakfast.getNutrition().getCalories() + lunch.getNutrition().getCalories() + dinner.getNutrition().getCalories());
-        combinedNutrition.setFats(breakfast.getNutrition().getFats().add(lunch.getNutrition().getFats()).add(dinner.getNutrition().getFats()));
-        combinedNutrition.setProtein(breakfast.getNutrition().getProtein().add(lunch.getNutrition().getProtein()).add(dinner.getNutrition().getProtein()));
-        combinedNutrition.setCarbohydrates(breakfast.getNutrition().getCarbohydrates().add(lunch.getNutrition().getCarbohydrates()).add(dinner.getNutrition().getCarbohydrates()));
-
-        return combinedNutrition;
+        return new JsonRes<>(true, 200, "Recipes found", selectedMealPlan);
     }
 
 }

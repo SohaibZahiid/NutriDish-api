@@ -46,4 +46,10 @@ public class NutritionEntity implements Serializable {
     @NotBlank(message = "Fats is required")
     private BigDecimal fats;
 
+    public NutritionEntity(long calories, BigDecimal protein, BigDecimal carbohydrates, BigDecimal fats) {
+        this.calories = calories;
+        this.protein = protein;
+        this.carbohydrates = carbohydrates;
+        this.fats = fats;
+    }
 }
