@@ -46,11 +46,18 @@ public class NutritionEntity implements Serializable {
     @NotBlank(message = "Fats is required")
     private BigDecimal fats;
 
+<<<<<<< Updated upstream
     public NutritionEntity(Long calories, BigDecimal protein, BigDecimal carbohydrates, BigDecimal fats) {
+=======
+    public NutritionEntity(long calories, BigDecimal protein, BigDecimal carbohydrates, BigDecimal fats) {
+>>>>>>> Stashed changes
         this.calories = calories;
         this.protein = protein;
         this.carbohydrates = carbohydrates;
         this.fats = fats;
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
