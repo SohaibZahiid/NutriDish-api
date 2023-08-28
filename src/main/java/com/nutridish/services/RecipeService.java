@@ -1,25 +1,19 @@
 package com.nutridish.services;
 
 import com.nutridish.dto.MealPlanDTO;
-import com.nutridish.entities.FavoriteEntity;
 import com.nutridish.entities.NutritionEntity;
 import com.nutridish.entities.RecipeEntity;
-import com.nutridish.entities.UserEntity;
 import com.nutridish.pojos.JsonRes;
-import com.nutridish.repositories.FavoriteRepository;
 import com.nutridish.repositories.RecipeRepository;
-import com.nutridish.repositories.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
     private final RecipeRepository recipeRepository;
-
-
 
 
     public RecipeService(RecipeRepository recipeRepository) {
@@ -64,7 +58,75 @@ public class RecipeService {
         return recipeRepository.findTop4ByFeaturedTrue();
     }
 
-    public JsonRes<MealPlanDTO> getMealPlan(Long calories, String dietary) {
+
+    public MealPlanDTO getMealPlan(Long desiredCalories, String desiredDietaryType) {
+        List<RecipeEntity> matchingRecipes = recipeRepository.findByDietaryTypeIgnoreCase(desiredDietaryType);
+        List<MealPlanDTO> validMealPlans = new ArrayList<>();
+        for (RecipeEntity breakfast : matchingRecipes) {
+            for (RecipeEntity lunch : matchingRecipes) {
+                for (RecipeEntity dinner : matchingRecipes) {
+                    NutritionEntity breakfastNutrition = breakfast.getNutrition();
+                    NutritionEntity lunchNutrition = lunch.getNutrition();
+                    NutritionEntity dinnerNutrition = dinner.getNutrition();
+
+                    long totalCalories = breakfastNutrition.getCalories()
+                            + lunchNutrition.getCalories()
+                            + dinnerNutrition.getCalories();
+
+                    if (totalCalories == desiredCalories) {
+                        MealPlanDTO mealPlan = new MealPlanDTO();
+                        mealPlan.setRecipes(Arrays.asList(breakfast, lunch, dinner));
+
+                        BigDecimal totalProtein = breakfastNutrition.getProtein()
+                                .add(lunchNutrition.getProtein())
+                                .add(dinnerNutrition.getProtein());
+
+                        BigDecimal totalCarbohydrates = breakfastNutrition.getCarbohydrates()
+                                .add(lunchNutrition.getCarbohydrates())
+                                .add(dinnerNutrition.getCarbohydrates());
+
+                        BigDecimal totalFats = breakfastNutrition.getFats()
+                                .add(lunchNutrition.getFats())
+                                .add(dinnerNutrition.getFats());
+
+                        mealPlan.setCombinedNutrition(new NutritionEntity(totalCalories, totalProtein, totalCarbohydrates, totalFats));
+
+                        validMealPlans.add(mealPlan);
+                    }
+                }
+            }
+        }
+
+        if (validMealPlans.isEmpty()) {
+            return null;
+        }
+
+        MealPlanDTO selectedMealPlan = validMealPlans.get(new Random().nextInt(validMealPlans.size()));
+
+        // Calculate combined nutritional values for the selected meal plan and set them in the DTO
+
+        return selectedMealPlan;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public JsonRes<MealPlanDTO> getMealPlan(Long calories, String dietary) {
 
         List<RecipeEntity> breakfasts = recipeRepository.findByMealTypeAndDietaryType("breakfast", dietary);
         List<RecipeEntity> lunches = recipeRepository.findByMealTypeAndDietaryType("lunch", dietary);
@@ -129,6 +191,6 @@ public class RecipeService {
         combinedNutrition.setCarbohydrates(breakfast.getNutrition().getCarbohydrates().add(lunch.getNutrition().getCarbohydrates()).add(dinner.getNutrition().getCarbohydrates()));
 
         return combinedNutrition;
-    }
+    }*/
 
 }

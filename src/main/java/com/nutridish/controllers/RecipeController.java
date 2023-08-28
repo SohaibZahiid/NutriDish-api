@@ -40,7 +40,7 @@ public class RecipeController {
 
 
     @GetMapping("/recipes/suggestions/{calories}/{dietary}")
-    public JsonRes<MealPlanDTO> getMealPlan(@PathVariable Long calories, @PathVariable String dietary) {
+    public MealPlanDTO getMealPlan(@PathVariable Long calories, @PathVariable String dietary) {
         return recipeService.getMealPlan(calories, dietary);
     }
 
